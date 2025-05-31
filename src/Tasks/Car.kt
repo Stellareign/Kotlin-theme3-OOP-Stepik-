@@ -1,17 +1,29 @@
 package Tasks
 
 class Car {
-    var brand = "";
-    var model = "";
-    var enginePower = 0;
-    var bodyColor = "";
+    val brand : String;
+    val model :String;
+    val enginePower : Int;
+    val bodyColor :String;
 
-    fun init (brand: String, model: String, enginePower: Int, bodyColor: String){
+    constructor(brand: String, model: String, enginePower: Int, bodyColor: String) {
         this.brand = brand;
         this.model = model;
         this.enginePower = enginePower;
         this.bodyColor = bodyColor;
     }
+
+    fun printInfo(){
+        println("$brand $model $enginePower л.с. $bodyColor")
+    }
+
+
+//    fun init (brand: String, model: String, enginePower: Int, bodyColor: String){
+//        this.brand = brand;
+//        this.model = model;
+//        this.enginePower = enginePower;
+//        this.bodyColor = bodyColor;
+//    }
     fun drive () {
         if(enginePower<120) {
             println("Еду далеко, но небыстро на $brand $model")
