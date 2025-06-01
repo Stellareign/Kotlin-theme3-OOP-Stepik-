@@ -13,7 +13,7 @@ fun main() {
     val productPrice = readln().toDouble();
     val productCard = ProductCard(productName= productName, brand = productBrand, size, productPrice);
     // можно (нужно) использовать именованные
-    //параметры для параметров одного типаЮ идущих подряд - это облегчает читаемость кода, понятно акому полю что присваивается
+    //параметры для параметров одного типа, идущих подряд - это облегчает читаемость кода, понятно какому полю что присваивается
 
     productCard.pintInfo();
 }

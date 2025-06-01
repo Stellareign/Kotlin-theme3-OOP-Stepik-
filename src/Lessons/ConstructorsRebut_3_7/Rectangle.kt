@@ -1,0 +1,28 @@
+package Lessons.ConstructorsRebut_3_7
+
+class Rectangle {
+    val long : Int;
+    val width : Int;
+
+    constructor(long: Int, width: Int) {
+        this.long = long;
+        this.width = width;
+    }
+//    constructor(size : Int) { // перегрузка конструктора - создание квадрата
+//        this.long = size;
+//        this.width = size;
+//    }
+constructor(size : Int) : this(size, size) {} // вторй вариант квадрата (меньше дублирующегося кода)
+constructor() : this(0, 0) {}// пустой конструктор (без дублирования)
+ //   constructor() : this(0) - пустой конструктор можно вызывать через любой непустой
+
+
+    fun draw () {
+        repeat(width) {
+            repeat(long) {
+                print("* ");
+            }
+            println();
+        }
+    }
+}
