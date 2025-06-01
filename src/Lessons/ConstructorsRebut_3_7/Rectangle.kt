@@ -1,14 +1,8 @@
 package Lessons.ConstructorsRebut_3_7
 
-class Rectangle {
-    val long : Int;
-    val width : Int;
+class Rectangle(val long: Int, val width: Int) {
 
-    constructor(long: Int, width: Int) {
-        this.long = long;
-        this.width = width;
-    }
-//    constructor(size : Int) { // перегрузка конструктора - создание квадрата
+    //    constructor(size : Int) { // перегрузка конструктора - создание квадрата
 //        this.long = size;
 //        this.width = size;
 //    }

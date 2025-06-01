@@ -2,20 +2,13 @@ package Lessons
 
 import com.sun.beans.introspect.PropertyInfo
 
-class ProductCard {
-    var productName: String;
-    var brand: String;
-    var size: Float;
-    var price: Double;
-    var description: String = "";
-
-    constructor(productName: String, brand: String, size: Float, price: Double) {
-        this.productName = productName
-        this.brand = brand
-        this.size = size
-        this.price = price
-
-    }
+class ProductCard(
+    var productName: String,
+    var brand: String,
+    var size: Float,
+    var price: Double
+) {
+    var description: String = ""; // а вот в первичном конструкторе можно присвоить значения по умолчанию
 
     //при создании конструктора не надо присваивать значения полям
 
