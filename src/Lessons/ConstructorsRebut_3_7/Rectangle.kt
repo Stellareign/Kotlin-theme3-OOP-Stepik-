@@ -14,7 +14,7 @@ constructor() : this(0, 0) {}// пустой конструктор (без ду
     fun draw () {
         repeat(width) {
             repeat(long) {
-                print("* ");
+                print("*  ");
             }
             println();
         }
