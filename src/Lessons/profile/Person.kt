@@ -1,4 +1,4 @@
-package Lessons
+package Lessons.profile
 
 class Person() {
     var name = "";

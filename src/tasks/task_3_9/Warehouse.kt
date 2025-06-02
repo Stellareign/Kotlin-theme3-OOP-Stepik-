@@ -1,4 +1,4 @@
-package Tasks.Task_3_9
+package tasks.task_3_9
 
 class Warehouse {
     fun getPack(deliveryObject: DeliveryObject): Pack {

@@ -1,5 +1,4 @@
-import Tasks.Car
-import Tasks.Monster
+import tasks.Monster
 
 fun main() {
 //    val car : Car = Car(brand = readln(), model = readln(), enginePower = readln().toInt(), bodyColor = readln())

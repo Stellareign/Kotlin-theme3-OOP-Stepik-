@@ -1,4 +1,6 @@
-package Lessons.ConstructorsRebut_3_7
+package Lessons.gui
+
+import Lessons.gui.Rectangle
 
 fun main() {
     val rect = Rectangle(12, 5)

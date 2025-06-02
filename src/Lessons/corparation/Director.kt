@@ -1,11 +1,12 @@
-package Lessons
+package Lessons.corparation
 
-import Tasks.Consultant
+import Lessons.corparation.Consultant
 
-class Director(
-    val name: String,
-    val age: Int
-) {
+class Director  (
+    name: String, // здесь уже ключевое слово val не нужно, так как у
+    // наследника это не поле, а свойство, наследуемое родителя
+    age: Int
+) : Worker (name, age){
 
     fun takeCoffee(secretary: Secretary, cupCount : Int, coffeeNme : String) {
         var coffeeName  = secretary.yourCoffee(cupCount);

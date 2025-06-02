@@ -1,7 +1,4 @@
-package Lessons
-
-import Tasks.Consultant
-import com.sun.beans.introspect.PropertyInfo
+package Lessons.corparation
 
 fun main() {
 //    print("Enter name: ");
@@ -23,7 +20,7 @@ fun main() {
 //    consult.hello();
 //    consult2.hello();
     val director = Director("BigBoss", 45);
-    val secretary : Secretary = Secretary (name = "Lessy");
+//    val secretary : Secretary = Secretary(name = "Lessy");
 //    director.takeCoffee(secretary, 1, "Mocco")
 //    consult.clientService()
     director.makeConsultantToWork(consult   )

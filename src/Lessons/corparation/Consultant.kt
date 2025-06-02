@@ -1,4 +1,4 @@
-package Tasks
+package Lessons.corparation
 
 import kotlin.random.Random
 
@@ -6,9 +6,9 @@ import kotlin.random.Random
  * Класс в дополнение к корпорации
  */
 class Consultant(
-    val name: String,
-    val age: Int = 0 // если поле необязательное, ему надо присвоить значение
-) {
+    name: String,
+    age: Int // если поле необязательное, ему надо присвоить значение
+) : Worker(name, age) {
 
 
     fun hello() {
@@ -19,7 +19,7 @@ class Consultant(
         }
     }
 
-    fun clientService(clientCount: Int = Random.nextInt(1, 10)): Int {
+    fun clientService(clientCount: Int = Random.Default.nextInt(1, 10)): Int {
         repeat(clientCount) {
             println("Client service")
         }

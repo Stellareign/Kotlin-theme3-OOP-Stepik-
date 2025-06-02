@@ -1,4 +1,4 @@
-package Lessons.ConstructorsRebut_3_7
+package Lessons.gui
 
 class Rectangle(val long: Int, val width: Int) {
 

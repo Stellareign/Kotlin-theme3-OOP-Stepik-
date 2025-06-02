@@ -1,6 +1,6 @@
-package Lessons
+package Lessons.corparation
 
-class Secretary(val name : String) {
+class Secretary( name : String, age : Int) : Worker (name, age) {
 
 
 

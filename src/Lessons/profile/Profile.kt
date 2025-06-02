@@ -1,4 +1,4 @@
-package Lessons
+package Lessons.profile
 
 fun main() {
     val first: Person = Person();
