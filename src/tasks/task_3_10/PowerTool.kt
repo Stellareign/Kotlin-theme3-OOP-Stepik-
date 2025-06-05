@@ -12,4 +12,5 @@ open class PowerTool(
     val price: Price, //цена
     val voltage: Int = 220 //напряжение, со значением по умолчанию 220
 ) {
+    open fun turnOn() {}
 }

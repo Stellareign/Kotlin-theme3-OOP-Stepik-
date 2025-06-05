@@ -1,6 +1,9 @@
 package Lessons.corparation
 
-class Secretary( name : String, age : Int) : Worker (name, age) {
+class Secretary(
+    name: String,
+    age: Int
+) : Worker (name, age) {
 
 
 
@@ -13,6 +16,9 @@ class Secretary( name : String, age : Int) : Worker (name, age) {
         }
 //        return coffeeName;
         return "Espresso";
+    }
+    override fun work() {
+        println("I'm make coffee")
     }
 
 }

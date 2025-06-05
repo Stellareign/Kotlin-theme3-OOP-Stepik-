@@ -1,5 +1,5 @@
 package tasks.task_3_10
-
+// УШМ
 class AngleGrinder(
     val discDiameter: Int, // диаметр диска
     val isSmoothStart: Boolean, // наличие системы плавного пуска
@@ -18,4 +18,8 @@ class AngleGrinder(
     weight = weight,
     cableLength = cableLength,
     price = price
-) {}
+) {
+    override fun turnOn() {
+        println("УШМ режет");
+    }
+}

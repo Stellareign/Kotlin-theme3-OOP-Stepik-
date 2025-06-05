@@ -1,5 +1,5 @@
 package tasks.task_3_10
-
+//ЦЕПНАЯ ПИЛА
 class ChainSaw(
     val chainSawTireLength: Int, // длина шины
     val chainLinksCount: Int, // кол-во звеньев цепи
@@ -21,4 +21,7 @@ class ChainSaw(
 )
 
 {
+    override fun turnOn() {
+        println("Цепная пила пилит");
+    }
 }

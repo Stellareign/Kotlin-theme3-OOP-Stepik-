@@ -25,4 +25,7 @@ class Consultant(
         }
         return clientCount;
     }
+    override fun work() {
+        println("I'm make consultation")
+    }
 }

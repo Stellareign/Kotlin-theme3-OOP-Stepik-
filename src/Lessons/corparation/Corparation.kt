@@ -15,7 +15,7 @@ fun main() {
 //
 //    productCard.pintInfo();
 
-    val consult : Consultant = Consultant("Max", 32)
+    val consultant = Consultant("Max", 32)
 //    val consult2 : Consultant = Consultant("Mark")
 //    consult.hello();
 //    consult2.hello();
@@ -23,6 +23,11 @@ fun main() {
 //    val secretary : Secretary = Secretary(name = "Lessy");
 //    director.takeCoffee(secretary, 1, "Mocco")
 //    consult.clientService()
-    director.makeConsultantToWork(consult   )
+    val secretary = Secretary("Beatriss", 35);
+//    director.makeConsultantToWork(consult   )
+    val employees  = listOf<Worker>(director, consultant, secretary);
+    for(employee in employees) {
+        employee.work();
+    }
 
 }

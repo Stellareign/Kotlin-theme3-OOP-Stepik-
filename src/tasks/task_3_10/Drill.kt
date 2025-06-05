@@ -1,5 +1,5 @@
 package tasks.task_3_10
-
+//ДРЕЛЬ
 class Drill(
     val drillChuckDiameter: Int, // диаметр сверлильного патрона
     val minRotationSpeed: Int, // минимальная скорость вращения
@@ -19,3 +19,8 @@ class Drill(
     cableLength = cableLength,
     price = price
 )
+{
+    override fun turnOn() {
+        println("Дрель сверлит");
+    }
+}

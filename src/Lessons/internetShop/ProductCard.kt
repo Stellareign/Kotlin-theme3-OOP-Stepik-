@@ -1,11 +1,8 @@
-package Lessons
+package Lessons.internetShop
 
-import com.sun.beans.introspect.PropertyInfo
-
-class ProductCard(
+open class ProductCard(
     var productName: String,
     var brand: String,
-    var size: Float,
     var price: Double
 ) {
     var description: String = ""; // а вот в первичном конструкторе можно присвоить значения по умолчанию
@@ -16,16 +13,16 @@ class ProductCard(
     fun init (name: String, brand : String, size: Float, price: Double) { // аналог конструктора
         this.productName = name;
         this.brand = brand;
-        this.size = size;
+
         this.price = price;
     }
 
-    fun pintInfo (){
-        println("productName: $productName, \nbrand: $brand, \nsize: $size, \nprice: $price, \ndescription: $description");// аналог тустринг
+    open fun pintInfo (){
+        println("productName: $productName, \nbrand: $brand,  \nprice: $price, \ndescription: $description");// аналог тустринг
     }
 
     override fun toString(): String {
-        return "ProductCard(productName='$productName', \nbrand='$brand', \nsize=$size, \nprice=$price, \ndescription='$description')"
+        return "ProductCard(productName='$productName', \nbrand='$brand', \\nprice=$price, \ndescription='$description')"
     }
 
 
