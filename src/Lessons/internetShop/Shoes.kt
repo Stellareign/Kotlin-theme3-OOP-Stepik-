@@ -1,6 +1,6 @@
 package Lessons.internetShop
 
-class Shoose(
+class Shoes(
     productName: String,
     brand: String,
     price: Double,
@@ -10,8 +10,8 @@ class Shoose(
     brand = brand,
     price = price
 ) {
-    override fun pintInfo() {
-        super.pintInfo("Product Name: $productName, Brand: $brand, Price:  $price, Size : $size")
+    override fun printInfo() {
+        println("Product Name: $productName, Brand: $brand, Price:  $price, Size : $size");
     }
 
 }

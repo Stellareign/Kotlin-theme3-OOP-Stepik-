@@ -17,7 +17,7 @@ open class ProductCard(
         this.price = price;
     }
 
-    open fun pintInfo (){
+    open fun printInfo (){
         println("productName: $productName, \nbrand: $brand,  \nprice: $price, \ndescription: $description");// аналог тустринг
     }
 
