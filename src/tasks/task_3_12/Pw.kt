@@ -1,6 +1,7 @@
 package tasks.task_3_12
 
-    open class TaskPW(
+class Pw {
+    open  class TaskPW(
         val brand: String,
         val model: String,
     ) {
@@ -9,7 +10,7 @@ package tasks.task_3_12
         }
     }
 
-    class Drill(
+     class Drill(
         brand: String,
         model: String,
         val drillChuckDiameter: Int,
@@ -21,7 +22,7 @@ package tasks.task_3_12
 
     }
 
-    class AngleGrinder(
+      class AngleGrinder(
         brand: String,
         model: String,
         val discDiameter: Int,
@@ -33,7 +34,7 @@ package tasks.task_3_12
 
     }
 
-    class ChainSaw(
+     class ChainSaw(
         brand: String,
         model: String,
         val chainSawTireLength: Int,
@@ -45,3 +46,4 @@ package tasks.task_3_12
         //переопределить метод turnOn()
     }
 
+}
