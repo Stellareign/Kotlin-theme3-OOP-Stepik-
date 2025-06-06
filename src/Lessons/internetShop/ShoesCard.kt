@@ -1,6 +1,6 @@
 package Lessons.internetShop
 
-class Shoes(
+class ShoesCard(
     productName: String,
     brand: String,
     price: Double,
@@ -13,7 +13,8 @@ class Shoes(
     type = type,
 ) {
     override fun printInfo() {
-        println("Product Name: $productName, Brand: $brand, Price:  $price, Size : $size");
+        super.printInfo()
+        println("Size : $size");
     }
 
 }

@@ -9,7 +9,14 @@ open class ProductCard(
 )
     {
 
-    fun init (name: String, brand : String, size: Float, price: Double, type: String, description: String) { // аналог конструктора
+    fun init(
+        name: String,
+        brand: String,
+        size: Float,
+        price: Double,
+        type: String,
+        description: String
+    ) { // аналог конструктора
         this.productName = name;   //при создании конструктора не надо присваивать значения полям
         this.brand = brand;
         this.price = price;
@@ -18,7 +25,7 @@ open class ProductCard(
     }
 
     open fun printInfo (){
-        println("productName: $productName, \nbrand: $brand,  \nprice: $price, \ndescription: $description, \tupe: $type");// аналог тустринг
+        print("productName: $productName, \nbrand: $brand,  \nprice: $price, \ntype: $type, \ndescription: $description, ");// аналог тустринг
     }
 
     override fun toString(): String {

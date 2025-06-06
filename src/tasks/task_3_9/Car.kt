@@ -1,4 +1,4 @@
-package tasks
+package tasks.task_3_9
 
 class Car {
     val brand : String;
