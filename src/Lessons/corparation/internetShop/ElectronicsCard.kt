@@ -1,4 +1,6 @@
-package Lessons.internetShop
+package Lessons.corparation.internetShop
+
+import Lessons.corparation.parents.ProductCard
 
 class ElectronicsCard(
     name: String,

@@ -1,5 +1,6 @@
-package Lessons.corparation
+package Lessons.corparation.employees
 
+import Lessons.corparation.parents.Worker
 import kotlin.random.Random
 
 /**

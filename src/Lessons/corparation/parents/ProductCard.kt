@@ -1,4 +1,4 @@
-package Lessons.internetShop
+package Lessons.corparation.parents
 
 open class ProductCard(
     var productName: String,

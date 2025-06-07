@@ -1,9 +1,11 @@
-package Lessons.corparation
+package Lessons.corparation.employees
+
+import Lessons.corparation.parents.Worker
 
 class Secretary(
     name: String,
     age: Int
-) : Worker (name, age) {
+) : Worker(name, age) {
 
 
 

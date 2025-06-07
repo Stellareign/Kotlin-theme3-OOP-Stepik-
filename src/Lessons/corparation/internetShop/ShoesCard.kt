@@ -1,6 +1,6 @@
-package Lessons.internetShop
+package Lessons.corparation.internetShop
 
-import jdk.jfr.Description
+import Lessons.corparation.parents.ProductCard
 
 class ShoesCard(
     productName: String,
@@ -9,7 +9,7 @@ class ShoesCard(
     type: String,
     val size: Double,
     description : String
-) : ProductCard (
+) : ProductCard(
     productName = productName,
     brand = brand,
     price = price,

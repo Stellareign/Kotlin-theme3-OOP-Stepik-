@@ -1,4 +1,4 @@
-package Lessons.corparation
+package Lessons.corparation.parents
 
 open class Worker(
     val name: String,

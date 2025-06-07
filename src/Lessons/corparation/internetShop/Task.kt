@@ -1,4 +1,4 @@
-package Lessons.internetShop
+package Lessons.corparation.internetShop
 
 fun main() {
     val electronicsCard = ElectronicsCard("tv", "LG",

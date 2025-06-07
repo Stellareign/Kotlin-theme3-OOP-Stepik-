@@ -1,5 +1,11 @@
 package Lessons.corparation
 
+import Lessons.corparation.employees.Accountant
+import Lessons.corparation.employees.Consultant
+import Lessons.corparation.employees.Director
+import Lessons.corparation.employees.Secretary
+import Lessons.corparation.parents.Worker
+
 fun main() {
 //    print("Enter name: ");
 //    val productName = readln();
@@ -25,7 +31,9 @@ fun main() {
 //    consult.clientService()
     val secretary = Secretary("Beatriss", 35);
 //    director.makeConsultantToWork(consult   )
-    val employees  = listOf<Worker>(director, consultant, secretary);
+    val accountant = Accountant("Lisa", 45)
+    val employees  = listOf<Worker>(director, consultant, secretary, accountant);
+
     for(employee in employees) {
         employee.work();
     }
