@@ -14,6 +14,6 @@ class FoodProductsCard(
 ) : ProductCard(name, brand, price, type, description) {
     override fun printInfo() {
         super.printInfo()
-        println("\nweightOrVolume: $weightOrVolume, \nType: $type, Calories Count: $caloriesCount");
+        println("\nweightOrVolume: $weightOrVolume, \nType: $type, \nCalories Count: $caloriesCount");
     }
 }

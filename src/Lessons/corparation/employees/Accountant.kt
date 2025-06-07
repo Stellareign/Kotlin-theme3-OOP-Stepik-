@@ -5,13 +5,14 @@ import Lessons.corparation.internetShop.FoodProductsCard
 import Lessons.corparation.internetShop.ShoesCard
 import Lessons.corparation.enam.OperationCodes
 import Lessons.corparation.enam.ProductTypes
+import Lessons.corparation.parents.ProductCard
 import Lessons.corparation.parents.Worker
 
 class Accountant(name: String, age: Int) : Worker(name, age) {
     val productsTypes = ProductTypes.entries;
     val operation = OperationCodes.entries;
+    val productesList = mutableListOf<ProductCard>();
     override fun work() {
-
         while (true) {
             print("Введите код операции (");
             for ((index, operationName) in operation.withIndex()) {
@@ -30,7 +31,9 @@ class Accountant(name: String, age: Int) : Worker(name, age) {
                     }
                     val productCode = readln().toInt();
                     val productType = productsTypes[productCode];
-                    productCardFromCode(productType)
+//                    productCardFromCode(productType);
+                    productesList.add(productCardFromCode(productType));
+                    println(productesList.joinToString(","));
                 }
             }
         }
@@ -44,7 +47,7 @@ class Accountant(name: String, age: Int) : Worker(name, age) {
         }
     }
 
-    fun productCardFromCode(type: ProductTypes) {
+    fun productCardFromCode(type: ProductTypes) : ProductCard {
         val productCard = when (type) {
             ProductTypes.FOOD -> safeFoodCard();
             ProductTypes.ELECTRONICS -> safeElectronic();
@@ -52,6 +55,7 @@ class Accountant(name: String, age: Int) : Worker(name, age) {
         }
         println("Добавлен товар: ");
         productCard.printInfo();
+        return productCard;
 
     }
 

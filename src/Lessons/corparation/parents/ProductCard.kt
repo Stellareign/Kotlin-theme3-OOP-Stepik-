@@ -29,7 +29,7 @@ open class ProductCard(
     }
 
     override fun toString(): String {
-        return "ProductCard(productName='$productName', \nbrand='$brand', \\nprice=$price, \ndescription='$description')"
+        return "ProductCard: \nproductName = '$productName', \nbrand = '$brand', \nnprice = $price, \ndescription = э'$description'"
     }
 
 
