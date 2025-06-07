@@ -3,32 +3,52 @@ package Lessons.corparation.employees
 import Lessons.corparation.internetShop.ElectronicsCard
 import Lessons.corparation.internetShop.FoodProductsCard
 import Lessons.corparation.internetShop.ShoesCard
-import Lessons.corparation.parents.ProductCard
+import Lessons.corparation.enam.OperationCodes
+import Lessons.corparation.enam.ProductTypes
 import Lessons.corparation.parents.Worker
 
 class Accountant(name: String, age: Int) : Worker(name, age) {
+    val productsTypes = ProductTypes.entries;
+    val operation = OperationCodes.entries;
     override fun work() {
+
         while (true) {
-            print("Введите код операции. \"0\" - выход, \"1\" - зарегистрировать товар: ");
+            print("Введите код операции (");
+            for ((index, operationName) in operation.withIndex()) {
+                print("$index - ${operationName.title}")
+                punctuationMarks(index, operation.size - 1);
+            }
             val operationCode = readln().toInt();
-            when (operationCode) {
-                0 -> break;
-                1 -> {
-                    print("Укажите код типа товара. \"0\" - продукты питания, \"1\" - бытовая техника, \"2\" - обувь: ");
+            when (operation[operationCode]) {
+                OperationCodes.EXIT -> break;
+                OperationCodes.REGISTER_ITEM -> {
+//                    print("Укажите код типа товара. \"0\" - ${productsTypes[0].title}, \"1\" - ${productsTypes[1].title}, \"2\" - ${productsTypes[2].title}: ");
+                    print("Укажите код типа товара: (");
+                    for ((index, type) in productsTypes.withIndex()) { // вывод индекса и названия - объявляем две переменные
+                        print("$index - ${type.title}");
+                        punctuationMarks(index, productsTypes.size - 1);
+                    }
                     val productCode = readln().toInt();
-                    productCardFromCode(productCode)
+                    val productType = productsTypes[productCode];
+                    productCardFromCode(productType)
                 }
             }
         }
     }
 
+    fun punctuationMarks(index: Int, size: Int) {
+        if (index < size) {
+            print(", ")
+        } else {
+            print("): ")
+        }
+    }
 
-    fun productCardFromCode(code: Int) {
-        var productCard = ProductCard("no", "no", 0.0, "no");
-        when (code) {
-            0 -> productCard = safeFoodCard();
-            1 -> productCard = safeElectronic();
-            2 -> productCard = safeShoeCard();
+    fun productCardFromCode(type: ProductTypes) {
+        val productCard = when (type) {
+            ProductTypes.FOOD -> safeFoodCard();
+            ProductTypes.ELECTRONICS -> safeElectronic();
+            ProductTypes.SHOE -> safeShoeCard();
         }
         println("Добавлен товар: ");
         productCard.printInfo();
