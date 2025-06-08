@@ -3,8 +3,8 @@ package Lessons.corparation.employees
 import Lessons.corparation.internetShop.ElectronicsCard
 import Lessons.corparation.internetShop.FoodProductsCard
 import Lessons.corparation.internetShop.ShoesCard
-import Lessons.corparation.enam.OperationCodes
-import Lessons.corparation.enam.ProductTypes
+import Lessons.corparation.enum.OperationCodes
+import Lessons.corparation.enum.ProductTypes
 import Lessons.corparation.parents.ProductCard
 import Lessons.corparation.parents.Worker
 

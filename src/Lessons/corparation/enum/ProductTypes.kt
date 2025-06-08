@@ -1,4 +1,4 @@
-package Lessons.corparation.enam
+package Lessons.corparation.enum
 
 enum class ProductTypes (val title: String) {
     FOOD ("продукты питания"),
