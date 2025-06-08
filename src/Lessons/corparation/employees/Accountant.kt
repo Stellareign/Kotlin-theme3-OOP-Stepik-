@@ -12,6 +12,7 @@ class Accountant(name: String, age: Int) : Worker(name, age) {
     val productsTypes = ProductTypes.entries;
     val operation = OperationCodes.entries;
     val productesList = mutableListOf<ProductCard>();
+
     override fun work() {
         while (true) {
             print("Введите код операции (");

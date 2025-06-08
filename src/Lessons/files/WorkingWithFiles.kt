@@ -23,6 +23,7 @@ fun main() {
 
 
     val wwnlf = WorkWithNotesListFile();
-    wwnlf.workWithNotesList();
+//    wwnlf.workWithNotesList();
+    wwnlf.readAdnSaveNotesListInCollection()
 
 }

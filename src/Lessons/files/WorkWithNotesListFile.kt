@@ -11,6 +11,7 @@ class WorkWithNotesListFile {
             print("Введите команду: ");
             for ((index, command) in noteCommand.withIndex()) {
                 print("$index - ${command.title}: ")
+                punctuationMarks(index, noteCommand.size -1);
             }
             val operationCode = readln().toInt();
 
@@ -29,4 +30,22 @@ class WorkWithNotesListFile {
             }
         }
     }
+
+    fun punctuationMarks(index: Int, size: Int) {
+        if (index < size) {
+            print(", ")
+        } else {
+            print("): ")
+        }
+    }
+
+    fun readAdnSaveNotesListInCollection(){
+        val notesList = notesListFile.readText().trim() // trim - удаляется все лишние пробелы и переносы строки
+        for ((index, note) in notesList.split("\n") .withIndex()) {
+            println("${index+1} - ${note}");
+        }
+
+    }
+
+
 }
