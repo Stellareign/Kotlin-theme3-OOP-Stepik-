@@ -1,18 +1,20 @@
 package Lessons.corparation.parents
 
+import com.sun.beans.introspect.PropertyInfo
+
 open class ProductCard(
     var productName: String,
     var brand: String,
     var price: Double,
     var type : String,
-    var description: String = ""// а вот в первичном конструкторе можно присвоить значения по умолчанию
+//    var description: String = ""// а вот в первичном конструкторе можно присвоить значения по умолчанию
 )
     {
+
 
     fun init(
         name: String,
         brand: String,
-        size: Float,
         price: Double,
         type: String,
         description: String
@@ -21,16 +23,17 @@ open class ProductCard(
         this.brand = brand;
         this.price = price;
         this.type = type;
-        this.description = description;
+//        this.description = description;
     }
 
     open fun printInfo (){
-        print("productName: $productName, \nbrand: $brand,  \nprice: $price, \ntype: $type, \ndescription: $description, ");// аналог тустринг
+        print("productName: $productName, \nbrand: $brand,  " +
+                "\nprice: $price, \ntype: $type ");// аналог тустринг
     }
 
     override fun toString(): String {
-        return "ProductCard: \nproductName = '$productName', \nbrand = '$brand', \nnprice = $price, \ndescription = э'$description'"
-    }
+        return "ProductCard: \nproductName = '$productName', " +
+                "\nbrand = '$brand', \nprice = $price, \ntype = $type"}
 
 
 }
