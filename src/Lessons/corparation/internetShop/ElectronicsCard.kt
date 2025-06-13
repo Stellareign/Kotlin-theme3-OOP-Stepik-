@@ -8,11 +8,12 @@ class ElectronicsCard(
     price: Double,
     type: String,
     val power: Int,
-    val oulet: String = "euro",
-    description: String
-) : ProductCard(name, brand, price, type, description) {
+    val powerSocket: String = "euro",
+    val description: String = ""
+) : ProductCard(name, brand, price, type) {
+
     override fun printInfo() {
         super.printInfo()
-        println("\npower: $power, \noulet: $oulet");
+        println("\npower: $power, \npowerSocket: $powerSocket");
     }
 }

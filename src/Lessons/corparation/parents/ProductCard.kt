@@ -1,12 +1,11 @@
 package Lessons.corparation.parents
 
-import com.sun.beans.introspect.PropertyInfo
-
 open class ProductCard(
     var productName: String,
     var brand: String,
     var price: Double,
-    var type : String,
+    var type: String,
+//    description: String,
 //    var description: String = ""// а вот в первичном конструкторе можно присвоить значения по умолчанию
 )
     {

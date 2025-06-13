@@ -2,5 +2,6 @@ package Lessons.corparation.enum
 
 enum class OperationCodes (val title: String) {
     EXIT ("Выход"),
-    REGISTER_ITEM ("Добавить товар")
+    REGISTER_ITEM ("Добавить товар"),
+    SHOW_ALL ("Показать все товары")
 }

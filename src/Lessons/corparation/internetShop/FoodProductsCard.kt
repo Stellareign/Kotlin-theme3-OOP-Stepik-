@@ -8,10 +8,10 @@ class FoodProductsCard(
     brand: String,
     price: Double,
     type: String,
-    description : String,
     val weightOrVolume: Double,
-    val caloriesCount: Int
-) : ProductCard(name, brand, price, type, description) {
+    val caloriesCount: Int,
+    val description : String=""
+) : ProductCard(name, brand, price, type) {
     override fun printInfo() {
         super.printInfo()
         println("\nweightOrVolume: $weightOrVolume, \nType: $type, \nCalories Count: $caloriesCount");

@@ -8,13 +8,12 @@ class ShoesCard(
     price: Double,
     type: String,
     val size: Double,
-    description : String
+    val description : String
 ) : ProductCard(
     productName = productName,
     brand = brand,
     price = price,
-    type = type,
-    description = description
+    type = type
 ) {
     override fun printInfo() {
         super.printInfo();

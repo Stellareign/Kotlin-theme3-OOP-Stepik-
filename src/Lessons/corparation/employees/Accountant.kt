@@ -36,6 +36,8 @@ class Accountant(name: String, age: Int) : Worker(name, age) {
                     productesList.add(productCardFromCode(productType));
                     println(productesList.joinToString(","));
                 }
+
+                OperationCodes.SHOW_ALL -> TODO()
             }
         }
     }
@@ -83,7 +85,7 @@ class Accountant(name: String, age: Int) : Worker(name, age) {
         val weight = readln().toDouble();
         print("Введите калорийность: ")
         val calories = readln().toInt();
-        return FoodProductsCard(name, brand, price, "food", "", weight, calories);
+        return FoodProductsCard(name, brand, price, "food", weight, calories, "");
     }
 
     fun safeElectronic(): ElectronicsCard {
