@@ -57,6 +57,13 @@ class Accountant2(name: String, age: Int) : Worker(name, age) {
 
     private fun removeCard(list: MutableList<ProductCard>, name: String, file: File) {
         list.removeAll { it.productName == name }
+//        val iterator = list.iterator()
+//        while (iterator.hasNext()) {
+//            val productCard = iterator.next()
+//            if (productCard.productName == name) {
+//                iterator.remove()  // Безопасное удаление через итератор
+//            }
+//        } // итератор подойдёт для более сложных условий удаления
         rewriteFile(list, file);
     }
 
