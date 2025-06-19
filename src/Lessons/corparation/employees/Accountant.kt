@@ -38,6 +38,7 @@ class Accountant(name: String, age: Int) : Worker(name, age) {
                 }
 
                 OperationCodes.SHOW_ALL -> TODO()
+                OperationCodes.DELETE_ITEM -> TODO()
             }
         }
     }
