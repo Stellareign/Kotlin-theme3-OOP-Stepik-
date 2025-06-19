@@ -8,6 +8,7 @@ import Lessons.corparation.enum.ProductTypes
 import Lessons.corparation.parents.ProductCard
 import Lessons.corparation.parents.Worker
 import java.io.File
+import java.lang.Thread.sleep
 
 
 class Accountant2(name: String, age: Int) : Worker(name, age) {
@@ -40,11 +41,49 @@ class Accountant2(name: String, age: Int) : Worker(name, age) {
                 }
 
                 OperationCodes.SHOW_ALL -> readTextFromFile(cardFile = productsFile);
+                OperationCodes.DELETE_ITEM -> {
+                    val list = readTextFromFile(productsFile);
+                    print("Введите наименование товара для удаления: ")
+                    val name = readln();
+                    removeCard(list, name, productsFile);
+                    print("Товар удалён, на складе осталось: \n");
+
+                    readTextFromFile(cardFile = productsFile);
+
+                }
             }
         }
     }
 
-    fun readTextFromFile(cardFile: File) {
+    private fun removeCard(list: MutableList<ProductCard>, name: String, file: File) {
+        for (card in list) {
+            list.removeAll{card.productName == "$name"}
+        }
+        rewriteFile(list, file);
+    }
+
+    private fun rewriteFile(list: MutableList<ProductCard>, file: File) {
+        for (card in list) {
+            file.writeText("${card.productName}%${card.brand}%${card.price}%")
+            when (card) {
+
+                is FoodProductsCard -> {
+                    file.appendText("${card.weightOrVolume}%${card.caloriesCount}%${card.type}\n")
+                }
+
+                is ShoesCard -> {
+                    file.appendText("${card.size}%${card.type}\n")
+                }
+
+                is ElectronicsCard -> {
+                    file.appendText("${card.power}%${card.powerSocket}%${card.type}\n")
+                }
+            }
+        }
+    }
+
+
+    fun readTextFromFile(cardFile: File): MutableList<ProductCard> {
         val newProductsList = mutableListOf<ProductCard>();
         val stringCard = cardFile.readText().trim();
         val cardsListFromFile = stringCard.split("\n");
@@ -53,24 +92,24 @@ class Accountant2(name: String, age: Int) : Worker(name, age) {
             val s = string.split("%");
             cardsList.add(s);
         }
-        var productCar = ProductCard("", "", 0.0, "")
+        var productCard = ProductCard("", "", 0.0, "")
         for (card in cardsList) {
             if (card.contains("${ProductTypes.FOOD}")) {
-                productCar = readFoodCard(card)
+                productCard = readFoodCard(card)
 
             } else if (card.contains("${ProductTypes.SHOE}")) {
-                productCar = readShoeCard(card)
+                productCard = readShoeCard(card)
 
             } else if (card.contains("${ProductTypes.ELECTRONICS}")) {
-                productCar = readElectronicCard(card)
+                productCard = readElectronicCard(card)
             }
-            productCar.printInfo();
-            println()
-            newProductsList.add(productCar);
+            newProductsList.add(productCard);
         }
         for (c in newProductsList) {
-            println("\n$c")
+            c.printInfo();
+            println();
         }
+        return newProductsList;
     }
 
     private fun punctuationMarks(index: Int, size: Int) {
@@ -132,9 +171,8 @@ class Accountant2(name: String, age: Int) : Worker(name, age) {
         val brand = list[1];
         val price = list[2].toDouble()
         val size = list[3].toDouble();
-        val desc = list[4];
         val type = list.last()
-        return ShoesCard(name, brand, price, type, size, desc)
+        return ShoesCard(name, brand, price, type, size, "")
 
     }
 
@@ -144,9 +182,8 @@ class Accountant2(name: String, age: Int) : Worker(name, age) {
         val price = list[2].toDouble()
         val weightOrVolume = list[3].toDouble();
         val calories = list[4].toInt();
-        val desc = list[5];
         val type = list.last()
-        return FoodProductsCard(name, brand, price, type, weightOrVolume, calories, desc);
+        return FoodProductsCard(name, brand, price, type, weightOrVolume, calories, "");
     }
 
     private fun readElectronicCard(list: List<String>): ElectronicsCard {
@@ -155,9 +192,8 @@ class Accountant2(name: String, age: Int) : Worker(name, age) {
         val price = list[2].toDouble();
         val power = list[3].toInt();
         val rosette = list[4];
-        val desc = list[5];
         val type = list.last()
-        return ElectronicsCard(name, brand, price, type, power, rosette, desc)
+        return ElectronicsCard(name, brand, price, type, power, rosette, "")
     }
 
 }
