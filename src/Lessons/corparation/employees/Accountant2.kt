@@ -56,15 +56,14 @@ class Accountant2(name: String, age: Int) : Worker(name, age) {
     }
 
     private fun removeCard(list: MutableList<ProductCard>, name: String, file: File) {
-        for (card in list) {
-            list.removeAll{card.productName == "$name"}
-        }
+        list.removeAll { it.productName == name }
         rewriteFile(list, file);
     }
 
     private fun rewriteFile(list: MutableList<ProductCard>, file: File) {
+        file.writeText("");
         for (card in list) {
-            file.writeText("${card.productName}%${card.brand}%${card.price}%")
+            file.appendText("${card.productName}%${card.brand}%${card.price}%")
             when (card) {
 
                 is FoodProductsCard -> {
@@ -85,9 +84,15 @@ class Accountant2(name: String, age: Int) : Worker(name, age) {
 
     fun readTextFromFile(cardFile: File): MutableList<ProductCard> {
         val newProductsList = mutableListOf<ProductCard>();
+        if (!cardFile.exists()) {
+            println("File does not exist");
+            return newProductsList;
+        }
         val stringCard = cardFile.readText().trim();
         val cardsListFromFile = stringCard.split("\n");
         val cardsList = mutableListOf<List<String>>();
+
+
         for (string in cardsListFromFile) {
             val s = string.split("%");
             cardsList.add(s);
