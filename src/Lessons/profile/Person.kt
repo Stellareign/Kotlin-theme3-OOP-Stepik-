@@ -1,10 +1,10 @@
 package Lessons.profile
 
 class Person() {
-    var name = "";
-    var age = 0;
-    var height = 0;
-    var weight = 0;
+   private var name = "";
+   private var age = 0;
+   private var height = 0;
+   private var weight = 0;
 
     fun init (name:String,age:Int, height:Int, weight:Int) {
         this.name = name;

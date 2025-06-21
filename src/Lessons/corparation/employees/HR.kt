@@ -5,7 +5,11 @@ import Lessons.corparation.parents.Worker
 import java.io.File
 import kotlin.text.split
 
-class HR(id: Int, name: String, age: Int) : Worker(id, name, age, Workers.HR) {
+class HR(
+    id: Int,
+    name: String,
+    age: Int
+) : Worker(id, name, age, Workers.HR) {
 
     override fun work() {
     }
@@ -124,4 +128,5 @@ class HR(id: Int, name: String, age: Int) : Worker(id, name, age, Workers.HR) {
             Workers.NO_POST -> return newWorker;
         }
     }
+
 }
