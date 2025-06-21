@@ -1,10 +1,12 @@
 package Lessons.corparation.parents
 
+import Lessons.corparation.enum.ProductTypes
+
 open class ProductCard(
     var productName: String,
     var brand: String,
     var price: Double,
-    var type: String,
+    var type: ProductTypes = ProductTypes.NO_TYPE,
 //    description: String,
 //    var description: String = ""// а вот в первичном конструкторе можно присвоить значения по умолчанию
 )
@@ -21,7 +23,7 @@ open class ProductCard(
         this.productName = name;   //при создании конструктора не надо присваивать значения полям
         this.brand = brand;
         this.price = price;
-        this.type = type;
+//        this.type = type;
 //        this.description = description;
     }
 

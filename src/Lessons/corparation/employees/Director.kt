@@ -1,12 +1,13 @@
 package Lessons.corparation.employees
 
+import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.Worker
 
 class Director  (
-    name: String, // здесь уже ключевое слово val не нужно, так как у
-    // наследника это не поле, а свойство, наследуемое родителя
+    id: Int,
+    name: String, // здесь уже ключевое слово val не нужно, так как у наследника это не поле, а свойство, наследуемое родителя
     age: Int
-) : Worker(name, age){
+) : Worker(id, name, age, Workers.DIRECTOR){
 
     fun takeCoffee(secretary: Secretary, cupCount : Int, coffeeNme : String) {
         var coffeeName  = secretary.yourCoffee(cupCount);

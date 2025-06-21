@@ -1,5 +1,6 @@
 package Lessons.corparation.internetShop
 
+import Lessons.corparation.enum.ProductTypes
 import Lessons.corparation.parents.ProductCard
 
 
@@ -7,13 +8,12 @@ class FoodProductsCard(
     name: String,
     brand: String,
     price: Double,
-    type: String,
     val weightOrVolume: Double,
     val caloriesCount: Int,
     val description : String=""
-) : ProductCard(name, brand, price, type) {
+) : ProductCard(name, brand, price, ProductTypes.FOOD) {
     override fun printInfo() {
         super.printInfo()
-        println("\nweightOrVolume: $weightOrVolume, \nType: $type, \nCalories Count: $caloriesCount");
+        println("\nweightOrVolume: $weightOrVolume, \nCalories Count: $caloriesCount");
     }
 }

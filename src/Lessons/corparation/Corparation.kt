@@ -21,17 +21,17 @@ fun main() {
 //
 //    productCard.pintInfo();
 
-    val consultant = Consultant("Max", 32)
+    val consultant = Consultant(0,"Max", 32)
 //    val consult2 : Consultant = Consultant("Mark")
 //    consult.hello();
 //    consult2.hello();
-    val director = Director("BigBoss", 45);
+    val director = Director(0,"BigBoss", 45);
 //    val secretary : Secretary = Secretary(name = "Lessy");
 //    director.takeCoffee(secretary, 1, "Mocco")
 //    consult.clientService()
-    val secretary = Secretary("Beatriss", 35);
+    val secretary = Secretary(0,"Beatriss", 35);
 //    director.makeConsultantToWork(consult   )
-    val accountant = Accountant("Lisa", 45)
+    val accountant = Accountant(0,"Lisa", 45)
     val employees  = listOf<Worker>(director, consultant, secretary, accountant);
 
     for(employee in employees) {

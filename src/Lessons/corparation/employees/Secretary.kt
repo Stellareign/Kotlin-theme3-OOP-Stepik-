@@ -1,11 +1,13 @@
 package Lessons.corparation.employees
 
+import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.Worker
 
 class Secretary(
+    id : Int,
     name: String,
     age: Int
-) : Worker(name, age) {
+) : Worker(id, name, age, Workers.SECRETARY) {
 
 
 

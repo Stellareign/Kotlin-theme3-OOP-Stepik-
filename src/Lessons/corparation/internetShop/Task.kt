@@ -1,6 +1,6 @@
 package Lessons.corparation.internetShop
 
-import Lessons.corparation.employees.Accountant2
+import Lessons.corparation.employees.Accountant
 
 fun main() {
 //    val electronicsCard = ElectronicsCard("tv", "LG",
@@ -16,7 +16,7 @@ fun main() {
 //        "run", 35.5, "для бега, прогулок, зала");
 //    crossShoes.printInfo();
 
-    val accountant = Accountant2("Df", 32);
+    val accountant = Accountant(0,"Df", 32);
     accountant.work()
 
 }
