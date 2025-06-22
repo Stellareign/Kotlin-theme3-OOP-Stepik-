@@ -2,7 +2,7 @@ package Lessons.corparation.parents
 
 import Lessons.corparation.enum.ProductTypes
 
-open class ProductCard(
+abstract class ProductCard(
     var productName: String,
     var brand: String,
     var price: Double,
@@ -27,10 +27,7 @@ open class ProductCard(
 //        this.description = description;
     }
 
-    open fun printInfo (){
-        print("productName: $productName, \nbrand: $brand,  " +
-                "\nprice: $price, \ntype: $type ");// аналог тустринг
-    }
+    abstract fun printInfo ()
 
     override fun toString(): String {
         return "ProductCard: \nproductName = '$productName', " +

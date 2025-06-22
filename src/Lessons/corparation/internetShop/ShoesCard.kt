@@ -16,7 +16,8 @@ class ShoesCard(
     type = ProductTypes.SHOE
 ) {
     override fun printInfo() {
-        super.printInfo();
+        print("productName: $productName, \nbrand: $brand,  " +
+                "\nprice: $price, \ntype: $type ");// аналог тустринг
         println("\nSize : $size");
     }
 

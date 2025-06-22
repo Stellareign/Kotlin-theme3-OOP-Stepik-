@@ -55,6 +55,7 @@ class HR(
         val employeesList = mutableListOf<Worker>()
         if (!file.exists()) {
             println("File does not exist");
+            return employeesList;
         }
         val staffString = file.readText().trim();
         if (staffString.isEmpty()) {
@@ -67,22 +68,22 @@ class HR(
             val s = stringWorker.split("%");
             staffStringList.add(s)
         }
-        var employee = Worker(0, "", 0, Workers.NO_POST);
+
         for (worker in staffStringList) {
             val post = worker.last();
+
             when (post) {
-                "${Workers.DIRECTOR}" -> employee =
-                    Worker(worker[0].toInt(), worker[1], worker[2].toInt(), Workers.DIRECTOR);
-                "${Workers.HR}" -> employee =
-                    Worker(worker[0].toInt(), worker[1], worker[2].toInt(), Workers.HR);
-                "${Workers.ACCOUNTANT}" -> employee =
-                    Worker(worker[0].toInt(), worker[1], worker[2].toInt(), Workers.ACCOUNTANT);
-                "${Workers.SECRETARY}" -> employee =
-                    Worker(worker[0].toInt(), worker[1], worker[2].toInt(), Workers.SECRETARY);
+                "${Workers.DIRECTOR}" ->
+                    employeesList.add( Director(worker[0].toInt(), worker[1], worker[2].toInt()));
+                "${Workers.HR}" ->
+                   employeesList.add(HR(worker[0].toInt(), worker[1], worker[2].toInt()));
+                "${Workers.ACCOUNTANT}" ->
+                   employeesList.add(Accountant(worker[0].toInt(), worker[1], worker[2].toInt()));
+                "${Workers.SECRETARY}" ->
+                    employeesList.add(Secretary(worker[0].toInt(), worker[1], worker[2].toInt()));
                 "${Workers.CONSULTANT}" ->
-                    employee = Worker(worker[0].toInt(), worker[1], worker[2].toInt(), Workers.CONSULTANT);
+                    employeesList.add(Consultant(worker[0].toInt(), worker[1], worker[2].toInt()));
             }
-            employeesList.add(employee)
         }
         return employeesList;
     }
@@ -118,15 +119,16 @@ class HR(
     }
 
     private fun safeWorker(id: Int, name: String, age: Int, post: Int): Worker {
-        val newWorker = Worker(id, name, age, Workers.NO_POST)
         when (posts[post]) {
             Workers.DIRECTOR -> return Director(id, name, age)
             Workers.HR -> return HR(id, name, age)
             Workers.ACCOUNTANT -> return Accountant(id, name, age)
             Workers.SECRETARY -> return Secretary(id, name, age)
             Workers.CONSULTANT -> return Consultant(id, name, age)
-            Workers.NO_POST -> return newWorker;
+            Workers.NO_POST -> TODO();
         }
     }
-
+override fun toString(): String {
+    return "id: $id, name: $name, age: $age, post: $post"
+}
 }

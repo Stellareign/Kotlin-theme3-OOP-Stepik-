@@ -13,7 +13,8 @@ class FoodProductsCard(
     val description : String=""
 ) : ProductCard(name, brand, price, ProductTypes.FOOD) {
     override fun printInfo() {
-        super.printInfo()
+        print("productName: $productName, \nbrand: $brand,  " +
+                "\nprice: $price, \ntype: $type ");// аналог тустринг
         println("\nweightOrVolume: $weightOrVolume, \nCalories Count: $caloriesCount");
     }
 }

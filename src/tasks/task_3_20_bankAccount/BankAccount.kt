@@ -12,6 +12,6 @@ open class BankAccount (private var balance: Int = 0) {
             balance -= amount;
         }
     }
-    fun getBalance() : Int = balance;
+    fun getMyBalance() : Int = balance;
 
 }

@@ -121,18 +121,17 @@ class Accountant(id: Int, name: String, age: Int) : Worker(id, name, age, Worker
             val s = string.split("%");
             cardsList.add(s);
         }
-        var productCard = ProductCard("", "", 0.0, ProductTypes.NO_TYPE)
+
         for (card in cardsList) {
             if (card.contains("${ProductTypes.FOOD}")) {
-                productCard = readFoodCard(card)
+                newProductsList.add(readFoodCard(card));
 
             } else if (card.contains("${ProductTypes.SHOE}")) {
-                productCard = readShoeCard(card)
+                newProductsList.add(readShoeCard(card));
 
             } else if (card.contains("${ProductTypes.ELECTRONICS}")) {
-                productCard = readElectronicCard(card)
+                newProductsList.add(readElectronicCard(card));
             }
-            newProductsList.add(productCard);
         }
         for (c in newProductsList) {
             c.printInfo();

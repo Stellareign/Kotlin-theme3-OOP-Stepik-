@@ -13,7 +13,8 @@ class ElectronicsCard(
 ) : ProductCard(name, brand, price, ProductTypes.ELECTRONICS) {
 
     override fun printInfo() {
-        super.printInfo()
+        print("productName: $productName, \nbrand: $brand,  " +
+                "\nprice: $price, \ntype: $type ");// аналог тустринг
         println("\npower: $power, \npowerSocket: $powerSocket");
     }
 }
