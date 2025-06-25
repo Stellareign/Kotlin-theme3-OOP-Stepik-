@@ -9,20 +9,28 @@ class HR(
     id: Int,
     name: String,
     age: Int
-) : Worker(id, name, age, Workers.HR) {
+) : Worker(id, name, age, Workers.HR), Cleaner, Supplier {
 
+    override fun delivery() {
+        println("${name}: доставляю товары")
+    }
+    override fun clean() {
+        super.clean()
+    }
     override fun work() {
+        println("Я принимаю и увольняю сотрудников")
     }
 
     private val posts = Workers.entries;
     private val staffFile = File("StaffFile.txt");
     private val postsCodes = Workers.entries;
 
-    fun showAllEmployees() {
+    fun showAllEmployees() : MutableList<Worker> {
         val employeesList = readFileToList(staffFile)
         for (worker in employeesList) {
             println(worker);
         }
+        return employeesList;
     }
 
     fun fireEmployee() {

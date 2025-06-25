@@ -10,7 +10,6 @@ class Secretary(
 ) : Worker(id, name, age, Workers.SECRETARY) {
 
 
-
     fun yourCoffee(count: Int, coffeeName: String = "Cappuccino") : String {
         repeat(count) {
             println("Stand up")

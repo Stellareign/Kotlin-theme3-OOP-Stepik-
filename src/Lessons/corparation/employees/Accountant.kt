@@ -11,12 +11,23 @@ import Lessons.corparation.parents.Worker
 import java.io.File
 
 
-class Accountant(id: Int, name: String, age: Int) : Worker(id, name, age, Workers.ACCOUNTANT) {
+class Accountant(
+    id: Int,
+    name: String,
+    age: Int
+) : Worker(id, name, age, Workers.ACCOUNTANT), Cleaner, Supplier {
     private val productsTypes = ProductTypes.entries;
     private val operation = OperationCodes.entries;
     private val productsFile = File("${name}_products_file.txt")
     private val hr = HR(0, " ", 0);
 
+    override fun delivery() {
+        println("${name}: доставляю товары")
+    }
+
+    override fun clean() {
+        super.clean()
+    }
 
     override fun work() {
         while (true) {

@@ -1,9 +1,12 @@
 package Lessons.corparation
 
 import Lessons.corparation.employees.Accountant
+import Lessons.corparation.employees.Cleaner
 import Lessons.corparation.employees.Consultant
 import Lessons.corparation.employees.Director
+import Lessons.corparation.employees.HR
 import Lessons.corparation.employees.Secretary
+import Lessons.corparation.employees.Supplier
 import Lessons.corparation.parents.Worker
 
 fun main() {
@@ -33,9 +36,19 @@ fun main() {
 //    director.makeConsultantToWork(consult   )
     val accountant = Accountant(0,"Lisa", 45)
     val employees  = listOf<Worker>(director, consultant, secretary, accountant);
+    val hr = HR(0, "Alice", 34);
 
-    for(employee in employees) {
-        employee.work();
+//    for(employee in employees) {
+//        employee.work();
+//    }
+//    accountant.work();
+    for(employee in hr.showAllEmployees()) {
+        if(employee is Cleaner){
+            employee.clean();
+        }
+        if(employee is Supplier){
+            employee.delivery();
+        }
     }
 
 }
