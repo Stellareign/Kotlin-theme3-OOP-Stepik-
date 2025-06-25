@@ -1,4 +1,4 @@
-package tasks.`3_22_Interface`
+package tasks.task_3_22_Interface
 
 interface Transformable {
    fun transform(data: String): String

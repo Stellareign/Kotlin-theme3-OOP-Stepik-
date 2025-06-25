@@ -1,4 +1,4 @@
-package tasks.`3_22_Interface`
+package tasks.task_3_22_Interface
 
 fun main() {
     val encryptor = Encryptor()
