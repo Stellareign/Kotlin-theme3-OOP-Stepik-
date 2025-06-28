@@ -7,7 +7,7 @@ class ShoesCard(
     productName: String,
     brand: String,
     price: Double,
-    val size: Double,
+    val size: Double
 //    val description : String
 ) : ProductCard(
     productName = productName,
@@ -19,6 +19,11 @@ class ShoesCard(
         print("productName: $productName, \nbrand: $brand,  " +
                 "\nprice: $price, \ntype: $type ");// аналог тустринг
         println("\nSize : $size");
+    }
+
+    override fun toString(): String {
+       return "productName: $productName, \nbrand: $brand,  " +
+                "\nprice: $price, \ntype: $type, \nSize : $size"
     }
 
 }

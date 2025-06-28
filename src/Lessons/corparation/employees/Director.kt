@@ -6,7 +6,8 @@ import Lessons.corparation.parents.Worker
 class Director (
     id: Int,
     name: String, // здесь уже ключевое слово val не нужно, так как у наследника это не поле, а свойство, наследуемое родителя
-    age: Int
+    age: Int,
+    salary: Int
 ) : Worker(id, name, age, Workers.DIRECTOR), Cleaner, Supplier {
     override fun delivery() {
         println("${name}: доставляю товары")
@@ -28,5 +29,7 @@ class Director (
         println("I'm drink coffee")
     }
 
-
+    override fun toString(): String {
+        return "id: $id, name: $name, aga: $age, post: $post, salary: ${getSalary()}"
+    }
 }

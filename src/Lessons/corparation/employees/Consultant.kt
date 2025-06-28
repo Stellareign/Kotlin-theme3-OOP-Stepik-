@@ -10,7 +10,8 @@ import kotlin.random.Random
 class Consultant(
     id: Int,
     name: String,
-    age: Int // если поле необязательное, ему надо присвоить значение
+    age: Int,
+    salary : Int // если поле необязательное, ему надо присвоить значение
 ) : Worker(id, name, age, Workers.CONSULTANT) {
 
 
@@ -30,5 +31,9 @@ class Consultant(
     }
     override fun work() {
         println("I'm make consultation")
+    }
+
+   override fun toString(): String {
+       return "id: $id, name: $name, aga: $age, post: $post, salary: ${getSalary()}"
     }
 }

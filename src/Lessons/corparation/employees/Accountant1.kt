@@ -43,6 +43,7 @@ class Accountant1(id: Int, name: String, age: Int) : Worker(id, name, age, Worke
                 OperationCodes.NEW_EMPLOYEE -> TODO()
                 OperationCodes.FIRE_EMPLOYEE -> TODO()
                 OperationCodes.SHOW_ALL_EMPLOYEES -> TODO()
+                OperationCodes.CHANGE_SALARY -> TODO()
             }
         }
     }
@@ -106,4 +107,5 @@ class Accountant1(id: Int, name: String, age: Int) : Worker(id, name, age, Worke
 
         return ElectronicsCard(name, brand, price, power, "euro", "");
     }
+
 }

@@ -8,15 +8,18 @@ import kotlin.text.split
 class HR(
     id: Int,
     name: String,
-    age: Int
+    age: Int,
+    salary: Int
 ) : Worker(id, name, age, Workers.HR), Cleaner, Supplier {
 
     override fun delivery() {
         println("${name}: доставляю товары")
     }
+
     override fun clean() {
         super.clean()
     }
+
     override fun work() {
         println("Я принимаю и увольняю сотрудников")
     }
@@ -25,7 +28,22 @@ class HR(
     private val staffFile = File("StaffFile.txt");
     private val postsCodes = Workers.entries;
 
-    fun showAllEmployees() : MutableList<Worker> {
+    fun changeSalary() {
+        val employeesList = readFileToList(staffFile);
+        print("Введите id сотрудника: ")
+        val id = readln().toInt();
+        val woker = employeesList.find { it.id == id }
+        if (woker == null) {
+            println("Сотрудник не найден.")
+        } else {
+            print("Укажите новый размер зарплаты: ")
+            val newSalary = readln().toInt();
+            woker.setSalary(newSalary)
+            rewriteEmployeesListToFile(employeesList)
+        }
+    }
+
+    fun showAllEmployees(): MutableList<Worker> {
         val employeesList = readFileToList(staffFile)
         for (worker in employeesList) {
             println(worker);
@@ -45,16 +63,15 @@ class HR(
             employeesList.remove(woker)
             rewriteEmployeesListToFile(employeesList)
         }
-
     }
 
     private fun writeEmployeeToFile(worker: Worker) {
-        staffFile.appendText("\n${worker.id}%${worker.name}%${worker.age}%${worker.post}");
+        staffFile.appendText("\n${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}");
     }
 
     private fun rewriteEmployeesListToFile(employees: List<Worker>) {
         val fileContent = employees.joinToString("\n") { worker ->
-            "${worker.id}%${worker.name}%${worker.age}%${worker.post}"
+            "${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}"
         }
         staffFile.writeText(fileContent)
     }
@@ -82,15 +99,20 @@ class HR(
 
             when (post) {
                 "${Workers.DIRECTOR}" ->
-                    employeesList.add( Director(worker[0].toInt(), worker[1], worker[2].toInt()));
+                    employeesList.add(Director(worker[0].toInt(), worker[1],
+                        worker[2].toInt(), worker[3].toInt()));
                 "${Workers.HR}" ->
-                   employeesList.add(HR(worker[0].toInt(), worker[1], worker[2].toInt()));
+                    employeesList.add(HR(worker[0].toInt(), worker[1],
+                        worker[2].toInt(), worker[3].toInt()));
                 "${Workers.ACCOUNTANT}" ->
-                   employeesList.add(Accountant(worker[0].toInt(), worker[1], worker[2].toInt()));
+                    employeesList.add(Accountant(worker[0].toInt(), worker[1],
+                        worker[2].toInt(), worker[3].toInt()));
                 "${Workers.SECRETARY}" ->
-                    employeesList.add(Secretary(worker[0].toInt(), worker[1], worker[2].toInt()));
+                    employeesList.add(Secretary(worker[0].toInt(), worker[1],
+                        worker[2].toInt(), worker[3].toInt()));
                 "${Workers.CONSULTANT}" ->
-                    employeesList.add(Consultant(worker[0].toInt(), worker[1], worker[2].toInt()));
+                    employeesList.add(Consultant(worker[0].toInt(), worker[1],
+                        worker[2].toInt(), worker[3].toInt()));
             }
         }
         return employeesList;
@@ -111,7 +133,9 @@ class HR(
             punctuationMarks(index, postsCodes.size - 1);
         }
         val post = readln().toInt();
-        val newEmployee = safeWorker(id, name, age, post);
+        print("Укажите зарплату: ")
+        val salary = readln().toInt();
+        val newEmployee = safeWorker(id, name, age, post, salary);
         employeesList.add(newEmployee);
         println("Добавлен сотрудник ${newEmployee}");
         writeEmployeeToFile(newEmployee);
@@ -126,17 +150,18 @@ class HR(
         }
     }
 
-    private fun safeWorker(id: Int, name: String, age: Int, post: Int): Worker {
+    private fun safeWorker(id: Int, name: String, age: Int, post: Int, salary: Int): Worker {
         when (posts[post]) {
-            Workers.DIRECTOR -> return Director(id, name, age)
-            Workers.HR -> return HR(id, name, age)
-            Workers.ACCOUNTANT -> return Accountant(id, name, age)
-            Workers.SECRETARY -> return Secretary(id, name, age)
-            Workers.CONSULTANT -> return Consultant(id, name, age)
+            Workers.DIRECTOR -> return Director(id, name, age, getSalary())
+            Workers.HR -> return HR(id, name, age, salary);
+            Workers.ACCOUNTANT -> return Accountant(id, name, age, getSalary());
+            Workers.SECRETARY -> return Secretary(id, name, age, getSalary())
+            Workers.CONSULTANT -> return Consultant(id, name, age, getSalary());
             Workers.NO_POST -> TODO();
         }
     }
-override fun toString(): String {
-    return "id: $id, name: $name, age: $age, post: $post"
-}
+
+    override fun toString(): String {
+        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}"
+    }
 }

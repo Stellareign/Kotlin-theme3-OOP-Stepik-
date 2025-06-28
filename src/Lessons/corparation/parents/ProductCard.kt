@@ -9,8 +9,7 @@ abstract class ProductCard(
     var type: ProductTypes = ProductTypes.NO_TYPE,
 //    description: String,
 //    var description: String = ""// а вот в первичном конструкторе можно присвоить значения по умолчанию
-)
-    {
+) {
 
 
     fun init(
@@ -27,11 +26,11 @@ abstract class ProductCard(
 //        this.description = description;
     }
 
-    abstract fun printInfo ()
+    abstract fun printInfo()
 
     override fun toString(): String {
-        return "ProductCard: \nproductName = '$productName', " +
-                "\nbrand = '$brand', \nprice = $price, \ntype = $type"}
+        return "ProductCard: \nproductName: $productName, n\nbrand:$brand, \nprice = $price, \ntype = $type"
+    }
 
 
 }

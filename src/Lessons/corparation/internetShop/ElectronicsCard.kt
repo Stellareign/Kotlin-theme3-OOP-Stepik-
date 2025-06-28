@@ -13,8 +13,16 @@ class ElectronicsCard(
 ) : ProductCard(name, brand, price, ProductTypes.ELECTRONICS) {
 
     override fun printInfo() {
-        print("productName: $productName, \nbrand: $brand,  " +
-                "\nprice: $price, \ntype: $type ");// аналог тустринг
+        print(
+            "productName: $productName, \nbrand: $brand,  " +
+                    "\nprice: $price, \ntype: $type "
+        );// аналог тустринг
         println("\npower: $power, \npowerSocket: $powerSocket");
+    }
+
+    override fun toString(): String {
+        return "\nproductName: $productName, " +
+                "\nbrand: $brand', \nprice = $price, \ntype = $type, \npower: $power, " +
+                "\npowerSocket = $powerSocket";
     }
 }

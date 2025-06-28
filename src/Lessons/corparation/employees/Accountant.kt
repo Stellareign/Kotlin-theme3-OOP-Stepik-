@@ -14,12 +14,14 @@ import java.io.File
 class Accountant(
     id: Int,
     name: String,
-    age: Int
+    age: Int,
+   salary: Int
 ) : Worker(id, name, age, Workers.ACCOUNTANT), Cleaner, Supplier {
+
     private val productsTypes = ProductTypes.entries;
     private val operation = OperationCodes.entries;
     private val productsFile = File("${name}_products_file.txt")
-    private val hr = HR(0, " ", 0);
+    private val hr = HR(0, " ", 0, 0);
 
     override fun delivery() {
         println("${name}: доставляю товары")
@@ -66,9 +68,11 @@ class Accountant(
                 OperationCodes.NEW_EMPLOYEE -> hr.addWorker();
                 OperationCodes.FIRE_EMPLOYEE -> hr.fireEmployee();
                 OperationCodes.SHOW_ALL_EMPLOYEES -> hr.showAllEmployees();
+                OperationCodes.CHANGE_SALARY -> hr.changeSalary();
             }
         }
     }
+
 
     private fun removeCard(list: MutableList<ProductCard>, name: String, file: File) {
         //*****************способ 3 *********************
@@ -235,5 +239,9 @@ class Accountant(
         val rosette = list[4];
         val type = list.last()
         return ElectronicsCard(name, brand, price, power, rosette, "")
+    }
+
+    override fun toString(): String {
+        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}"
     }
 }

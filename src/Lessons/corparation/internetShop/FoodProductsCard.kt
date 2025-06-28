@@ -17,4 +17,8 @@ class FoodProductsCard(
                 "\nprice: $price, \ntype: $type ");// аналог тустринг
         println("\nweightOrVolume: $weightOrVolume, \nCalories Count: $caloriesCount");
     }
+    override fun toString(): String {
+        return "productName: $productName, \nbrand: $brand,  " +
+                "\nprice: $price, \ntype: $type, \nweightOrVolume: $weightOrVolume, \ncaloriesCount: $caloriesCount";
+    }
 }

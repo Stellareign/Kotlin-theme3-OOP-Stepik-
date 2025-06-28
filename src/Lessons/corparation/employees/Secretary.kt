@@ -6,7 +6,8 @@ import Lessons.corparation.parents.Worker
 class Secretary(
     id : Int,
     name: String,
-    age: Int
+    age: Int,
+    salary : Int
 ) : Worker(id, name, age, Workers.SECRETARY) {
 
 
@@ -24,4 +25,7 @@ class Secretary(
         println("I'm make coffee")
     }
 
+    override fun toString(): String {
+        return "id: $id, name: $name, aga: $age, post: $post, salary: ${this.getSalary()}"
+    }
 }

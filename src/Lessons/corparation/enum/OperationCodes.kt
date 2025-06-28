@@ -7,6 +7,7 @@ enum class OperationCodes (val title: String) {
     DELETE_ITEM ("Удалить карточку"),
     NEW_EMPLOYEE ("Добавить сотрудника"),
     FIRE_EMPLOYEE ("Уволить сотрудника"),
-    SHOW_ALL_EMPLOYEES ("Список сотрудников")
+    SHOW_ALL_EMPLOYEES ("Список сотрудников"),
+    CHANGE_SALARY ("Изменить зарплату")
 
 }
