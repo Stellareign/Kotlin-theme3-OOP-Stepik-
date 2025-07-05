@@ -11,8 +11,9 @@ class Consultant(
     id: Int,
     name: String,
     age: Int,
-    salary : Int // если поле необязательное, ему надо присвоить значение
-) : Worker(id, name, age, Workers.CONSULTANT) {
+    salary : Int
+// если поле необязательное, ему надо присвоить значение
+) : Worker(id, name, age, Workers.CONSULTANT, salary) {
 
 
     fun hello() {
@@ -34,6 +35,6 @@ class Consultant(
     }
 
    override fun toString(): String {
-       return "id: $id, name: $name, aga: $age, post: $post, salary: ${getSalary()}"
+       return "id: $id, name: $name, aga: $age, post: $post, salary: $salary"
     }
 }

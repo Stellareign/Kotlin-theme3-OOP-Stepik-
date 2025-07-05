@@ -9,7 +9,12 @@ import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.ProductCard
 import Lessons.corparation.parents.Worker
 
-class Accountant1(id: Int, name: String, age: Int) : Worker(id, name, age, Workers.ACCOUNTANT) {
+class Accountant1(
+    id: Int,
+    name: String,
+    age: Int,
+    salary: Int
+) : Worker(id, name, age, Workers.ACCOUNTANT, salary) {
     val productsTypes = ProductTypes.entries;
     val operation = OperationCodes.entries;
     val productesList = mutableListOf<ProductCard>();

@@ -8,9 +8,14 @@ class Director (
     name: String, // здесь уже ключевое слово val не нужно, так как у наследника это не поле, а свойство, наследуемое родителя
     age: Int,
     salary: Int
-) : Worker(id, name, age, Workers.DIRECTOR), Cleaner, Supplier {
+) : Worker(id, name, age, Workers.DIRECTOR, salary), Cleaner, Supplier {
+
     override fun delivery() {
         println("${name}: доставляю товары")
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return super.equals(other)
     }
 
     override fun clean() {
@@ -29,7 +34,9 @@ class Director (
         println("I'm drink coffee")
     }
 
+
     override fun toString(): String {
-        return "id: $id, name: $name, aga: $age, post: $post, salary: ${getSalary()}"
+        return "id: $id, name: $name, aga: $age, post: $post, salary: $salary"
     }
+
 }

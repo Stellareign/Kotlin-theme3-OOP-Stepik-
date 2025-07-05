@@ -7,8 +7,8 @@ class Secretary(
     id : Int,
     name: String,
     age: Int,
-    salary : Int
-) : Worker(id, name, age, Workers.SECRETARY) {
+    salary: Int
+) : Worker(id, name, age, Workers.SECRETARY, salary) {
 
 
     fun yourCoffee(count: Int, coffeeName: String = "Cappuccino") : String {
@@ -26,6 +26,6 @@ class Secretary(
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, aga: $age, post: $post, salary: ${this.getSalary()}"
+        return "id: $id, name: $name, aga: $age, post: $post, salary: ${this.salary}"
     }
 }

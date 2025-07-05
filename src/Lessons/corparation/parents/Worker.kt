@@ -9,19 +9,25 @@ abstract class Worker(
     val name: String,
     val age: Int = 0,
     val post: Workers,
+    var salary : Int = 0
 ) {
-   private var salary: Int = 15_000;
-    fun setSalary(value : Int){
-        salary = value;
-    }
-    fun getSalary() : Int{
-        return this.salary;
-    }
+//    var salary: Int = 15_000
+//        set(value: Int) {
+//            if (value < field) {
+//                println("Зарплата не может стать меньше существующей")
+//            } else {
+//                field = value;
+//            }
+//        }
+//        get() : Int{
+//            return field;
+//        }
+// для корректной работы моего кода необходимо либо внести в первичный конструктор, либо создать вторичный конструктор с полем зарплаты
 
     abstract fun work()
 
     override fun toString(): String {
-        return "Worker(id: $id, name: $name, aga: $age, post: $post, salary: ${getSalary()})"
+        return "Worker(id: $id, name: $name, age: $age, post: $post, salary: $salary)"
     }
 
 }

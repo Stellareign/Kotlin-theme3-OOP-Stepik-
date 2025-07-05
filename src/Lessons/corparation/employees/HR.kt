@@ -9,8 +9,8 @@ class HR(
     id: Int,
     name: String,
     age: Int,
-    salary: Int
-) : Worker(id, name, age, Workers.HR), Cleaner, Supplier {
+    salary : Int
+) : Worker(id, name, age, Workers.HR, salary), Cleaner, Supplier {
 
     override fun delivery() {
         println("${name}: доставляю товары")
@@ -38,7 +38,7 @@ class HR(
         } else {
             print("Укажите новый размер зарплаты: ")
             val newSalary = readln().toInt();
-            woker.setSalary(newSalary)
+            woker.salary = newSalary;
             rewriteEmployeesListToFile(employeesList)
         }
     }
@@ -66,12 +66,12 @@ class HR(
     }
 
     private fun writeEmployeeToFile(worker: Worker) {
-        staffFile.appendText("\n${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}");
+        staffFile.appendText("\n${worker.id}%${worker.name}%${worker.age}%${worker.salary}%${worker.post}");
     }
 
     private fun rewriteEmployeesListToFile(employees: List<Worker>) {
         val fileContent = employees.joinToString("\n") { worker ->
-            "${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}"
+            "${worker.id}%${worker.name}%${worker.age}%${worker.salary}%${worker.post}"
         }
         staffFile.writeText(fileContent)
     }
@@ -152,16 +152,16 @@ class HR(
 
     private fun safeWorker(id: Int, name: String, age: Int, post: Int, salary: Int): Worker {
         when (posts[post]) {
-            Workers.DIRECTOR -> return Director(id, name, age, getSalary())
+            Workers.DIRECTOR -> return Director(id, name, age, salary)
             Workers.HR -> return HR(id, name, age, salary);
-            Workers.ACCOUNTANT -> return Accountant(id, name, age, getSalary());
-            Workers.SECRETARY -> return Secretary(id, name, age, getSalary())
-            Workers.CONSULTANT -> return Consultant(id, name, age, getSalary());
+            Workers.ACCOUNTANT -> return Accountant(id, name, age, salary);
+            Workers.SECRETARY -> return Secretary(id, name, age, salary)
+            Workers.CONSULTANT -> return Consultant(id, name, age, salary);
             Workers.NO_POST -> TODO();
         }
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}"
+        return "id: $id, name: $name, age: $age, post: $post, salary: $salary()}"
     }
 }

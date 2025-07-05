@@ -15,8 +15,11 @@ class Accountant(
     id: Int,
     name: String,
     age: Int,
-   salary: Int
-) : Worker(id, name, age, Workers.ACCOUNTANT), Cleaner, Supplier {
+    salary : Int
+) : Worker(id, name, age, Workers.ACCOUNTANT, salary), Cleaner, Supplier {
+
+
+
 
     private val productsTypes = ProductTypes.entries;
     private val operation = OperationCodes.entries;
@@ -242,6 +245,6 @@ class Accountant(
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}"
+        return "id: $id, name: $name, age: $age, post: $post, salary: ${this.salary}"
     }
 }

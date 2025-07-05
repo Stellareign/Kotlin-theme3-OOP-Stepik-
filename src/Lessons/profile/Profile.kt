@@ -1,7 +1,8 @@
 package Lessons.profile
 
 fun main() {
-    val first: Person = Person();
+    val first: Person = Person("Арт",189, 85);
+    val first2: Person = Person("Арт",189, 85, 35);
 //    val second: Person = Person();
 //    print("Enter your name: ")
 //    first.name = readln();
@@ -33,6 +34,10 @@ fun main() {
 
 //    secretary.yourCoffee(5,"Cappuccino");
     first.init(name =readln(), age = readln().toInt(), height = readln().toInt(), weight = readln().toInt() );
-    first.printInfo();
-    first.sayHello();
+//    first.printInfo();
+//    first.sayHello();
+    first.age
+    first.age = 38
+    first.age
+
 }
