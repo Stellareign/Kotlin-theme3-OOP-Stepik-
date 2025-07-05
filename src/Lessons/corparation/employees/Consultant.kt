@@ -35,6 +35,6 @@ class Consultant(
     }
 
    override fun toString(): String {
-       return "id: $id, name: $name, aga: $age, post: $post, salary: $salary"
+       return "id: $id, name: $name, aga: $age, post: $post, salary: ${getSalary()}"
     }
 }

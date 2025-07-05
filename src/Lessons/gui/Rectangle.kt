@@ -1,6 +1,8 @@
 package Lessons.gui
 
-class Rectangle(val long: Int, val width: Int) {
+import javax.swing.Spring.height
+
+class Rectangle(var long: Int, var width: Int) {
 
     //    constructor(size : Int) { // перегрузка конструктора - создание квадрата
 //        this.long = size;
@@ -10,6 +12,8 @@ constructor(size : Int) : this(size, size) {} // вторй вариант кв�
 constructor() : this(0, 0) {}// пустой конструктор (без дублирования)
  //   constructor() : this(0) - пустой конструктор можно вызывать через любой непустой
 
+    val area : Int
+    get() = width * long
 
     fun draw () {
         repeat(width) {

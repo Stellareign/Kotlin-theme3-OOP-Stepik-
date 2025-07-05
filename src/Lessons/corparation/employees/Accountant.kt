@@ -36,7 +36,7 @@ class Accountant(
 
     override fun work() {
         while (true) {
-            print("Введите код операции (");
+            print("Введите код операции: \n");
             for ((index, operationName) in operation.withIndex()) {
                 print("$index - ${operationName.title}\n")
 //                punctuationMarks(index, operation.size - 1);
@@ -245,6 +245,6 @@ class Accountant(
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: ${this.salary}"
+        return "id: $id, name: $name, age: $age, post: $post, salary: ${this.getSalary()}"
     }
 }

@@ -10,7 +10,13 @@ class HR(
     name: String,
     age: Int,
     salary : Int
-) : Worker(id, name, age, Workers.HR, salary), Cleaner, Supplier {
+) : Worker(
+    id,
+    name,
+    age,
+    Workers.HR,
+    salary
+), Cleaner, Supplier {
 
     override fun delivery() {
         println("${name}: доставляю товары")
@@ -32,13 +38,13 @@ class HR(
         val employeesList = readFileToList(staffFile);
         print("Введите id сотрудника: ")
         val id = readln().toInt();
-        val woker = employeesList.find { it.id == id }
-        if (woker == null) {
+        val worker = employeesList.find { it.id == id }
+        if (worker == null) {
             println("Сотрудник не найден.")
         } else {
             print("Укажите новый размер зарплаты: ")
             val newSalary = readln().toInt();
-            woker.salary = newSalary;
+            worker.setSalary(newSalary);
             rewriteEmployeesListToFile(employeesList)
         }
     }
@@ -66,12 +72,12 @@ class HR(
     }
 
     private fun writeEmployeeToFile(worker: Worker) {
-        staffFile.appendText("\n${worker.id}%${worker.name}%${worker.age}%${worker.salary}%${worker.post}");
+        staffFile.appendText("\n${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}");
     }
 
     private fun rewriteEmployeesListToFile(employees: List<Worker>) {
         val fileContent = employees.joinToString("\n") { worker ->
-            "${worker.id}%${worker.name}%${worker.age}%${worker.salary}%${worker.post}"
+            "${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}"
         }
         staffFile.writeText(fileContent)
     }
@@ -162,6 +168,6 @@ class HR(
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: $salary()}"
+        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}()}"
     }
 }
