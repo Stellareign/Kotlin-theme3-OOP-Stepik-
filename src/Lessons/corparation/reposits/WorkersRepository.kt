@@ -114,6 +114,7 @@ class WorkersRepository {
         } else {
             worker.setSalary(newSalary);
             rewriteEmployeesListToFile(employeesList)
+            println("Сотрудник ${worker.name} теперь получает зарплату $newSalary")
         }
     }
 }

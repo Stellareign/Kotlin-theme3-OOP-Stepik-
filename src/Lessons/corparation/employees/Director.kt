@@ -36,7 +36,7 @@ class Director (
 
 
     override fun toString(): String {
-        return "id: $id, name: $name, aga: $age, post: $post, salary: ${getSalary()}"
+        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}"
     }
 
 }

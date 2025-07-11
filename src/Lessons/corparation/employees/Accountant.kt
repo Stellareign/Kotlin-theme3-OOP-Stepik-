@@ -8,6 +8,7 @@ import Lessons.corparation.enum.ProductTypes
 import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.ProductCard
 import Lessons.corparation.parents.Worker
+import Lessons.corparation.reposits.ProductCardsRepository
 import java.io.File
 
 
@@ -18,13 +19,10 @@ class Accountant(
     salary : Int
 ) : Worker(id, name, age, Workers.ACCOUNTANT, salary), Cleaner, Supplier {
 
-
-
-
     private val productsTypes = ProductTypes.entries;
     private val operation = OperationCodes.entries;
-    private val productsFile = File("${name}_products_file.txt")
-    private val hr = HR(0, " ", 0, 0);
+    private val productCardsRepository = ProductCardsRepository()
+    private val hr = HR();
 
     override fun delivery() {
         println("${name}: доставляю товары")
@@ -53,19 +51,17 @@ class Accountant(
                     }
                     val productCode = readln().toInt();
                     val productType = productsTypes[productCode];
-                    safeProductCardToFile(productType);
+                    productCardsRepository.safeProductCards(productType);
                 }
 
-                OperationCodes.SHOW_ALL_PRODUCTS -> readTextFromFile(cardFile = productsFile);
+                OperationCodes.SHOW_ALL_PRODUCTS -> productCardsRepository.readAllProductCards()
                 OperationCodes.DELETE_ITEM -> {
-                    val list = readTextFromFile(productsFile);
+                    val list = productCardsRepository.readAllProductCards()
                     print("Введите наименование товара для удаления: ");
                     val name = readln();
-                    removeCard(list, name, productsFile);
+                    productCardsRepository.removeCard(list, name);
                     print("Товар удалён, на складе осталось: \n");
-
-                    readTextFromFile(cardFile = productsFile);
-
+                    productCardsRepository.readAllProductCards()
                 }
 
                 OperationCodes.NEW_EMPLOYEE -> hr.addWorker();
@@ -77,86 +73,6 @@ class Accountant(
     }
 
 
-    private fun removeCard(list: MutableList<ProductCard>, name: String, file: File) {
-        //*****************способ 3 *********************
-        list.removeAll { it.productName == name } // наиболее надёжный способ для нашего варианта + лаконичность (внутри предикат)
-        //****************способ 2**********************
-//        val iterator = list.iterator()
-//        while (iterator.hasNext()) {
-//            val productCard = iterator.next()
-//            if (productCard.productName == name) {
-//                iterator.remove()  // Безопасное удаление через итератор
-//            }
-//        } // итератор подойдёт для более сложных условий удаления
-        //*****************способ 1***************************** самый небезопасный
-//        for(card in list) {
-//            if(card.productName == name) {
-//                list.remove(card);
-//                break // без break не работает, ошибка
-//            }
-//        }
-        rewriteFile(list, file);
-    }
-
-    private fun rewriteFile(list: MutableList<ProductCard>, file: File) {
-        file.writeText("");
-        for (card in list) {
-            file.appendText("${card.productName}%${card.brand}%${card.price}%")
-            when (card) {
-
-                is FoodProductsCard -> {
-                    file.appendText("${card.weightOrVolume}%${card.caloriesCount}%${card.type}\n")
-                }
-
-                is ShoesCard -> {
-                    file.appendText("${card.size}%${card.type}\n")
-                }
-
-                is ElectronicsCard -> {
-                    file.appendText("${card.power}%${card.powerSocket}%${card.type}\n")
-                }
-            }
-        }
-    }
-
-
-    fun readTextFromFile(cardFile: File): MutableList<ProductCard> {
-        val newProductsList = mutableListOf<ProductCard>();
-        if (!cardFile.exists()) {
-            println("File does not exist");
-            return newProductsList;
-        }
-        val stringCard = cardFile.readText().trim();
-        if (stringCard.isEmpty()) {
-            println("File is empty");
-            return newProductsList;
-        }
-        val cardsListFromFile = stringCard.split("\n");
-        val cardsList = mutableListOf<List<String>>();
-
-
-        for (string in cardsListFromFile) {
-            val s = string.split("%");
-            cardsList.add(s);
-        }
-
-        for (card in cardsList) {
-            if (card.contains("${ProductTypes.FOOD}")) {
-                newProductsList.add(readFoodCard(card));
-
-            } else if (card.contains("${ProductTypes.SHOE}")) {
-                newProductsList.add(readShoeCard(card));
-
-            } else if (card.contains("${ProductTypes.ELECTRONICS}")) {
-                newProductsList.add(readElectronicCard(card));
-            }
-        }
-        for (c in newProductsList) {
-            c.printInfo();
-            println();
-        }
-        return newProductsList;
-    }
 
     private fun punctuationMarks(index: Int, size: Int) {
         if (index < size) {
@@ -164,84 +80,6 @@ class Accountant(
         } else {
             print("): ")
         }
-    }
-
-    private fun safeProductCardToFile(type: ProductTypes) {
-        when (type) {
-            ProductTypes.FOOD -> {
-                print("Введите название продукта: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите марку продукта: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите цену: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите вес / объём: ")
-                productsFile.appendText("${readln()}%");
-                print("Введите калорийность: ")
-                productsFile.appendText("${readln()}%");
-                productsFile.appendText("FOOD")
-                productsFile.appendText("\n");
-            }
-
-            ProductTypes.SHOE -> {
-                print("Введите название обуви: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите марку товара: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите цену: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите размер: ")
-                productsFile.appendText("${readln()}%");
-                productsFile.appendText("SHOE")
-                productsFile.appendText("\n");
-            }
-
-            ProductTypes.ELECTRONICS -> {
-                print("Введите название техники: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите марку техники: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите цену: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите мощность: ")
-                productsFile.appendText("${readln()}%");
-                productsFile.appendText("ELECTRONICS")
-                productsFile.appendText("\n");
-            }
-
-            ProductTypes.NO_TYPE -> TODO()
-        }
-    }
-
-
-    private fun readShoeCard(list: List<String>): ShoesCard {
-        val name = list[0];
-        val brand = list[1];
-        val price = list[2].toDouble()
-        val size = list[3].toDouble();
-        val type = list.last()
-        return ShoesCard(name, brand, price, size);
-
-    }
-
-    private fun readFoodCard(list: List<String>): FoodProductsCard {
-        val name = list[0]
-        val brand = list[1]
-        val price = list[2].toDouble()
-        val weightOrVolume = list[3].toDouble();
-        val calories = list[4].toInt();
-        val type = list.last()
-        return FoodProductsCard(name, brand, price, weightOrVolume, calories, "");
-    }
-
-    private fun readElectronicCard(list: List<String>): ElectronicsCard {
-        val name = list[0];
-        val brand = list[1];
-        val price = list[2].toDouble();
-        val power = list[3].toInt();
-        val rosette = list[4];
-        val type = list.last()
-        return ElectronicsCard(name, brand, price, power, rosette, "")
     }
 
     override fun toString(): String {

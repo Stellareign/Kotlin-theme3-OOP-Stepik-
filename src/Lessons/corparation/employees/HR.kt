@@ -5,10 +5,10 @@ import Lessons.corparation.parents.Worker
 import Lessons.corparation.reposits.WorkersRepository
 
 class HR(
-    id: Int,
-    name: String,
-    age: Int,
-    salary: Int
+    id: Int=0,
+    name: String = "",
+    age: Int=0,
+    salary: Int=0
 ) : Worker(
     id,
     name,
