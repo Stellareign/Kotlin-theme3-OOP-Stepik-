@@ -11,7 +11,9 @@ import java.io.File
 class ProductCardsRepository {
 
     private val productsFile = File("products_file.txt")
-    private val hr = HR();
+   val productCardsList = readTextFromFile();
+
+
     fun readAllProductCards () : MutableList<ProductCard> {
         return readTextFromFile()
     }

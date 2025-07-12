@@ -20,6 +20,7 @@ abstract class Worker(
                 println("Зарплата не может стать меньше существующей")
             } else {
                 this.salary = salary;
+                println("Сотрудник ${this.name} теперь получает зарплату $salary")
             }
     }
 

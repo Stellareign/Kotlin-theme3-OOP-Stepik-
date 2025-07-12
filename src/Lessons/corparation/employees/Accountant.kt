@@ -9,6 +9,7 @@ import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.ProductCard
 import Lessons.corparation.parents.Worker
 import Lessons.corparation.reposits.ProductCardsRepository
+import Lessons.corparation.reposits.WorkersRepository
 import java.io.File
 
 
@@ -23,6 +24,7 @@ class Accountant(
     private val operation = OperationCodes.entries;
     private val productCardsRepository = ProductCardsRepository()
     private val hr = HR();
+    private val workersRepository = WorkersRepository()
 
     override fun delivery() {
         println("${name}: доставляю товары")
@@ -41,8 +43,10 @@ class Accountant(
             }
             val operationCode = readln().toInt();
             when (operation[operationCode]) {
-                OperationCodes.EXIT -> break;
-
+                OperationCodes.EXIT -> {
+                    workersRepository.saveChanges()
+                    break;
+                }
                 OperationCodes.REGISTER_ITEM -> {
                     print("Укажите код типа товара: (");
                     for ((index, type) in productsTypes.withIndex()) { // вывод индекса и названия - объявляем две переменные

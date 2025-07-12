@@ -43,7 +43,7 @@ class HR(
     }
 
     fun showAllEmployees(): MutableList<Worker> {
-        val employeesList = workersRepository.readEmployeeList()
+        val employeesList = workersRepository.employeesList
         for (worker in employeesList) {
             println(worker);
         }
@@ -58,7 +58,7 @@ class HR(
 
 
     fun addWorker(): List<Worker> {
-        val employeesList = workersRepository.readEmployeeList()
+        val employeesList = workersRepository.employeesList
         print("Введите id сотрудника равное: ")
         val id = readln().toInt();
         print("Введите имя сотрудника: ");
@@ -76,7 +76,6 @@ class HR(
         val newEmployee = safeWorker(id, name, age, post, salary);
         employeesList.add(newEmployee);
         println("Добавлен сотрудник ${newEmployee}");
-        workersRepository.registerNewEmployee(newEmployee);
         return employeesList;
     }
 

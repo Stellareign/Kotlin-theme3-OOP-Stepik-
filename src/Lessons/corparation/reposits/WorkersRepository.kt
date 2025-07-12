@@ -12,27 +12,34 @@ import java.io.File
 class WorkersRepository {
 
     private val staffFile = File("StaffFile.txt")
+    val employeesList = readFileToList() // держим список в оперативной памяти для сокращения обращений в оперативной памяти
 
     private fun writeEmployeeToFile(worker: Worker) {
         staffFile.appendText("\n${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}");
-    }
+    } // теперь метод не нужен
 
     fun registerNewEmployee(worker: Worker) {
-        writeEmployeeToFile(worker)
+//        writeEmployeeToFile(worker)
+        employeesList.add(worker);
     }
 
-    fun rewriteEmployeesListToFile(employees: List<Worker>) {
-        val fileContent = employees.joinToString("\n") { worker ->
+
+    private fun rewriteEmployeesListToFile() {
+        val fileContent = employeesList.joinToString("\n") { worker ->
             "${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}"
         }
+//        val content = StringBuilder()
+//        for(worker in employeesList) {
+//            content.append("${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}\n")
+//        }
         staffFile.writeText(fileContent)
     }
 
-   private fun readFileToList(): MutableList<Worker> {
-        val employeesList = mutableListOf<Worker>()
+    private fun readFileToList(): MutableList<Worker> {
+        val employees = mutableListOf<Worker>();
         if (!staffFile.exists()) {
             println("File does not exist");
-            return employeesList;
+            staffFile.createNewFile()
         }
         val staffString = staffFile.readText().trim();
         if (staffString.isEmpty()) {
@@ -51,35 +58,35 @@ class WorkersRepository {
 
             when (post) {
                 "${Workers.DIRECTOR}" ->
-                    employeesList.add(
+                    employees.add(
                         Director(
                             worker[0].toInt(), worker[1],
                             worker[2].toInt(), worker[3].toInt()
                         )
                     );
                 "${Workers.HR}" ->
-                    employeesList.add(
+                    employees.add(
                         HR(
                             worker[0].toInt(), worker[1],
                             worker[2].toInt(), worker[3].toInt()
                         )
                     );
                 "${Workers.ACCOUNTANT}" ->
-                    employeesList.add(
+                    employees.add(
                         Accountant(
                             worker[0].toInt(), worker[1],
                             worker[2].toInt(), worker[3].toInt()
                         )
                     );
                 "${Workers.SECRETARY}" ->
-                    employeesList.add(
+                    employees.add(
                         Secretary(
                             worker[0].toInt(), worker[1],
                             worker[2].toInt(), worker[3].toInt()
                         )
                     );
                 "${Workers.CONSULTANT}" ->
-                    employeesList.add(
+                    employees.add(
                         Consultant(
                             worker[0].toInt(), worker[1],
                             worker[2].toInt(), worker[3].toInt()
@@ -87,34 +94,32 @@ class WorkersRepository {
                     );
             }
         }
-        return employeesList;
+        return employees;
     }
-    fun readEmployeeList ()  : MutableList<Worker> {
-        return readFileToList()
-    }
-
 
     fun fireEmployee(id: Int) {
-        val employeesList = readFileToList();
-        val woker = employeesList.find { it.id == id }
-        if (woker == null) {
+        val worker = employeesList.find { it.id == id }
+        if (worker == null) {
             println("Сотрудник не найден.")
         } else {
-            print("Сотрудник $woker уволен \n")
-            employeesList.remove(woker)
-          rewriteEmployeesListToFile(employeesList)
+            print("Сотрудник $worker уволен \n")
+            employeesList.remove(worker)
+//            rewriteEmployeesListToFile(employeesList)
         }
     }
 
     fun changeSalary(id: Int, newSalary: Int) {
-        val employeesList = readFileToList();
         val worker = employeesList.find { it.id == id }
         if (worker == null) {
             println("Сотрудник не найден.")
         } else {
             worker.setSalary(newSalary);
-            rewriteEmployeesListToFile(employeesList)
-            println("Сотрудник ${worker.name} теперь получает зарплату $newSalary")
+//            rewriteEmployeesListToFile(employeesList)
         }
+    }
+
+    fun saveChanges() {
+        employeesList.sortedBy{it.id}
+        rewriteEmployeesListToFile()
     }
 }
