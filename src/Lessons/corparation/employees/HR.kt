@@ -17,7 +17,7 @@ class HR(
     salary
 ), Cleaner, Supplier {
 
-    val workersRepository = WorkersRepository();
+//    val workersRepository = WorkersRepository();
 
     override fun delivery() {
         println("${name}: доставляю товары")
@@ -39,11 +39,11 @@ class HR(
         val id = readln().toInt();
         print("Введите новую зарплату сотрудника: ")
         val newSalary = readln().toInt();
-        workersRepository.changeSalary(id, newSalary);
+        WorkersRepository.changeSalary(id, newSalary);
     }
 
     fun showAllEmployees(): MutableList<Worker> {
-        val employeesList = workersRepository.employeesList
+        val employeesList = WorkersRepository.employeesList
         for (worker in employeesList) {
             println(worker);
         }
@@ -53,12 +53,12 @@ class HR(
     fun fireEmployee() {
         print("Введите id сотрудника: ")
         val id = readln().toInt();
-        workersRepository.fireEmployee(id)
+        WorkersRepository.fireEmployee(id)
     }
 
 
     fun addWorker(): List<Worker> {
-        val employeesList = workersRepository.employeesList
+        val employeesList = WorkersRepository.employeesList
         print("Введите id сотрудника равное: ")
         val id = readln().toInt();
         print("Введите имя сотрудника: ");

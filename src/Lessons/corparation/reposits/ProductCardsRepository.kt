@@ -8,7 +8,7 @@ import Lessons.corparation.internetShop.ShoesCard
 import Lessons.corparation.parents.ProductCard
 import java.io.File
 
-class ProductCardsRepository {
+object ProductCardsRepository {
 
     private val productsFile = File("products_file.txt")
    val productCardsList = readTextFromFile();

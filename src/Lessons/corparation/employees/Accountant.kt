@@ -22,9 +22,9 @@ class Accountant(
 
     private val productsTypes = ProductTypes.entries;
     private val operation = OperationCodes.entries;
-    private val productCardsRepository = ProductCardsRepository()
+//    private val productCardsRepository = ProductCardsRepository()
     private val hr = HR();
-    private val workersRepository = WorkersRepository()
+//    private val workersRepository = WorkersRepository()
 
     override fun delivery() {
         println("${name}: доставляю товары")
@@ -44,7 +44,7 @@ class Accountant(
             val operationCode = readln().toInt();
             when (operation[operationCode]) {
                 OperationCodes.EXIT -> {
-                    workersRepository.saveChanges()
+                    WorkersRepository.saveChanges()
                     break;
                 }
                 OperationCodes.REGISTER_ITEM -> {
@@ -55,17 +55,17 @@ class Accountant(
                     }
                     val productCode = readln().toInt();
                     val productType = productsTypes[productCode];
-                    productCardsRepository.safeProductCards(productType);
+                    ProductCardsRepository.safeProductCards(productType);
                 }
 
-                OperationCodes.SHOW_ALL_PRODUCTS -> productCardsRepository.readAllProductCards()
+                OperationCodes.SHOW_ALL_PRODUCTS -> ProductCardsRepository.readAllProductCards()
                 OperationCodes.DELETE_ITEM -> {
-                    val list = productCardsRepository.readAllProductCards()
+                    val list = ProductCardsRepository.readAllProductCards()
                     print("Введите наименование товара для удаления: ");
                     val name = readln();
-                    productCardsRepository.removeCard(list, name);
+                    ProductCardsRepository.removeCard(list, name);
                     print("Товар удалён, на складе осталось: \n");
-                    productCardsRepository.readAllProductCards()
+                    ProductCardsRepository.readAllProductCards()
                 }
 
                 OperationCodes.NEW_EMPLOYEE -> hr.addWorker();

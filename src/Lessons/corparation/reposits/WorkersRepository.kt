@@ -9,7 +9,7 @@ import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.Worker
 import java.io.File
 
-class WorkersRepository {
+object WorkersRepository {
 
     private val staffFile = File("StaffFile.txt")
     val employeesList = readFileToList() // держим список в оперативной памяти для сокращения обращений в оперативной памяти
