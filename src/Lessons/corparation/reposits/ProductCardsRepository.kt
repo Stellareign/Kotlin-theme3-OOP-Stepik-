@@ -11,13 +11,14 @@ import java.io.File
 object ProductCardsRepository {
 
     private val productsFile = File("products_file.txt")
-   val productCardsList = readTextFromFile();
+    val productCardsList = readTextFromFile();
 
 
-    fun readAllProductCards () : MutableList<ProductCard> {
+    fun readAllProductCards(): MutableList<ProductCard> {
         return readTextFromFile()
     }
-    fun safeProductCards (type: ProductTypes) {
+
+    fun safeProductCards(type: ProductTypes) {
         safeProductCardToFile(type)
     }
 
@@ -25,6 +26,7 @@ object ProductCardsRepository {
         val newProductsList = mutableListOf<ProductCard>();
         if (!productsFile.exists()) {
             println("File does not exist");
+
             productsFile.createNewFile()
             return newProductsList;
         }
@@ -128,6 +130,7 @@ object ProductCardsRepository {
 //        }
         rewriteFile(list, productsFile);
     }
+
     private fun rewriteFile(list: MutableList<ProductCard>, file: File) {
         file.writeText("");
         for (card in list) {

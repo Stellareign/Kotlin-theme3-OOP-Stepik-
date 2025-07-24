@@ -12,7 +12,11 @@ import java.io.File
 object WorkersRepository {
 
     private val staffFile = File("StaffFile.txt")
-    val employeesList = readFileToList() // держим список в оперативной памяти для сокращения обращений в оперативной памяти
+    private val _employeesList: MutableList<Worker> = readFileToList() // backing field (внутреннее поле для работы с оригинальной коллекцией)
+
+    val employeesList:List<Worker> // наружу принято отдавать неизменяемую коллекцию
+//    =readFileToList() // держим список в оперативной памяти для сокращения обращений в оперативной памяти - теперь неактуально (24.07.25)
+        get() = _employeesList.toList() // .toMutableList() - создаём копию коллекции, с котрой работаем в оперативной памяти
 
     private fun writeEmployeeToFile(worker: Worker) {
         staffFile.appendText("\n${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}");
@@ -20,12 +24,12 @@ object WorkersRepository {
 
     fun registerNewEmployee(worker: Worker) {
 //        writeEmployeeToFile(worker)
-        employeesList.add(worker);
+        _employeesList.add(worker);
     }
 
 
     private fun rewriteEmployeesListToFile() {
-        val fileContent = employeesList.joinToString("\n") { worker ->
+        val fileContent = _employeesList.joinToString("\n") { worker ->
             "${worker.id}%${worker.name}%${worker.age}%${worker.getSalary()}%${worker.post}"
         }
 //        val content = StringBuilder()
@@ -98,18 +102,18 @@ object WorkersRepository {
     }
 
     fun fireEmployee(id: Int) {
-        val worker = employeesList.find { it.id == id }
+        val worker = _employeesList.find { it.id == id }
         if (worker == null) {
             println("Сотрудник не найден.")
         } else {
             print("Сотрудник $worker уволен \n")
-            employeesList.remove(worker)
+            _employeesList.removeAll { worker.id == id }
 //            rewriteEmployeesListToFile(employeesList)
         }
     }
 
     fun changeSalary(id: Int, newSalary: Int) {
-        val worker = employeesList.find { it.id == id }
+        val worker = _employeesList.find { it.id == id }
         if (worker == null) {
             println("Сотрудник не найден.")
         } else {
@@ -119,7 +123,7 @@ object WorkersRepository {
     }
 
     fun saveChanges() {
-        employeesList.sortedBy{it.id}
+        _employeesList.sortedBy { it.id }
         rewriteEmployeesListToFile()
     }
 }

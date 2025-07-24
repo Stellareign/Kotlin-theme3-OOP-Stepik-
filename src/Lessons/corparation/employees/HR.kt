@@ -5,10 +5,10 @@ import Lessons.corparation.parents.Worker
 import Lessons.corparation.reposits.WorkersRepository
 
 class HR(
-    id: Int=0,
+    id: Int = 0,
     name: String = "",
-    age: Int=0,
-    salary: Int=0
+    age: Int = 0,
+    salary: Int = 0
 ) : Worker(
     id,
     name,
@@ -58,7 +58,7 @@ class HR(
 
 
     fun addWorker(): List<Worker> {
-        val employeesList = WorkersRepository.employeesList
+//        val employeesList = WorkersRepository.employeesList
         print("Введите id сотрудника равное: ")
         val id = readln().toInt();
         print("Введите имя сотрудника: ");
@@ -74,9 +74,12 @@ class HR(
         print("Укажите зарплату: ")
         val salary = readln().toInt();
         val newEmployee = safeWorker(id, name, age, post, salary);
-        employeesList.add(newEmployee);
+//        employeesList.add(newEmployee);
+        WorkersRepository.registerNewEmployee(newEmployee);
         println("Добавлен сотрудник ${newEmployee}");
-        return employeesList;
+
+        //return employeesList;
+        return WorkersRepository.employeesList
     }
 
     private fun punctuationMarks(index: Int, size: Int) {
