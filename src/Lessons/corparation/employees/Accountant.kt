@@ -1,16 +1,11 @@
 package Lessons.corparation.employees
 
-import Lessons.corparation.internetShop.ElectronicsCard
-import Lessons.corparation.internetShop.FoodProductsCard
-import Lessons.corparation.internetShop.ShoesCard
 import Lessons.corparation.enum.OperationCodes
 import Lessons.corparation.enum.ProductTypes
 import Lessons.corparation.enum.Workers
-import Lessons.corparation.parents.ProductCard
 import Lessons.corparation.parents.Worker
 import Lessons.corparation.reposits.ProductCardsRepository
 import Lessons.corparation.reposits.WorkersRepository
-import java.io.File
 
 
 class Accountant(
@@ -45,6 +40,7 @@ class Accountant(
             when (operation[operationCode]) {
                 OperationCodes.EXIT -> {
                     WorkersRepository.saveChanges()
+                    ProductCardsRepository.saveChanges()
                     break;
                 }
                 OperationCodes.REGISTER_ITEM -> {
@@ -58,14 +54,17 @@ class Accountant(
                     ProductCardsRepository.safeProductCards(productType);
                 }
 
-                OperationCodes.SHOW_ALL_PRODUCTS -> ProductCardsRepository.readAllProductCards()
+                OperationCodes.SHOW_ALL_PRODUCTS -> {
+                    ProductCardsRepository.saveChanges()
+                    ProductCardsRepository.showAllProductCards()
+                }
                 OperationCodes.DELETE_ITEM -> {
-                    val list = ProductCardsRepository.readAllProductCards()
+                    val list = ProductCardsRepository.productCardsList
                     print("Введите наименование товара для удаления: ");
                     val name = readln();
-                    ProductCardsRepository.removeCard(list, name);
+                    ProductCardsRepository.removeCardFromList( name);
                     print("Товар удалён, на складе осталось: \n");
-                    ProductCardsRepository.readAllProductCards()
+                    ProductCardsRepository.showAllProductCards()
                 }
 
                 OperationCodes.NEW_EMPLOYEE -> hr.addWorker();

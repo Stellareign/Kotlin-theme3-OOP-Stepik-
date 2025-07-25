@@ -1,25 +1,35 @@
 package Lessons.corparation.reposits
 
-import Lessons.corparation.employees.HR
 import Lessons.corparation.enum.ProductTypes
 import Lessons.corparation.internetShop.ElectronicsCard
 import Lessons.corparation.internetShop.FoodProductsCard
 import Lessons.corparation.internetShop.ShoesCard
 import Lessons.corparation.parents.ProductCard
+
 import java.io.File
 
 object ProductCardsRepository {
 
     private val productsFile = File("products_file.txt")
-    val productCardsList = readTextFromFile();
+    private val _productCardsList: MutableList<ProductCard> = readTextFromFile() //внутренняя переменная
 
+    val productCardsList: List<ProductCard>
+        get() = _productCardsList.toList() // оперативная переменная - копия основной
 
-    fun readAllProductCards(): MutableList<ProductCard> {
-        return readTextFromFile()
+    fun saveChanges() {
+        rewriteFile(productCardsList, productsFile)
+    }
+
+    fun showAllProductCards(): List<ProductCard> {
+        return readTextFromFile().toList()
     }
 
     fun safeProductCards(type: ProductTypes) {
         safeProductCardToFile(type)
+    }
+
+    fun removeCardFromList(name: String) {
+        removeCard(name)
     }
 
     private fun readTextFromFile(): MutableList<ProductCard> {
@@ -110,9 +120,10 @@ object ProductCardsRepository {
         }
     }
 
-    fun removeCard(list: MutableList<ProductCard>, name: String) {
+
+    private fun removeCard(name: String) {
         //*****************способ 3 *********************
-        list.removeAll { it.productName == name } // наиболее надёжный способ для нашего варианта + лаконичность (внутри предикат)
+        _productCardsList.removeAll { it.productName == name } // наиболее надёжный способ для нашего варианта + лаконичность (внутри предикат)
         //****************способ 2**********************
 //        val iterator = list.iterator()
 //        while (iterator.hasNext()) {
@@ -128,10 +139,10 @@ object ProductCardsRepository {
 //                break // без break не работает, ошибка
 //            }
 //        }
-        rewriteFile(list, productsFile);
+//        rewriteFile(list, productsFile);
     }
 
-    private fun rewriteFile(list: MutableList<ProductCard>, file: File) {
+    private fun rewriteFile(list: List<ProductCard>, file: File) {
         file.writeText("");
         for (card in list) {
             file.appendText("${card.productName}%${card.brand}%${card.price}%")
