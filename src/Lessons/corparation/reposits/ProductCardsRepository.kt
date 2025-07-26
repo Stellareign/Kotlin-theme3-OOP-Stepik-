@@ -11,21 +11,25 @@ import java.io.File
 object ProductCardsRepository {
 
     private val productsFile = File("products_file.txt")
+
     private val _productCardsList: MutableList<ProductCard> = readTextFromFile() //внутренняя переменная
 
     val productCardsList: List<ProductCard>
         get() = _productCardsList.toList() // оперативная переменная - копия основной
 
     fun saveChanges() {
-        rewriteFile(productCardsList, productsFile)
+        rewriteFile(productsFile)
     }
 
-    fun showAllProductCards(): List<ProductCard> {
-        return readTextFromFile().toList()
+    fun showAllProductCards() {
+        for (c in _productCardsList) {
+            c.printInfo()
+            println()
+        }
     }
 
     fun safeProductCards(type: ProductTypes) {
-        safeProductCardToFile(type)
+        safeProductCardToList(type)
     }
 
     fun removeCardFromList(name: String) {
@@ -65,11 +69,61 @@ object ProductCardsRepository {
                 newProductsList.add(readElectronicCard(card));
             }
         }
-        for (c in newProductsList) {
-            c.printInfo();
-            println();
-        }
+//        for (c in newProductsList) {
+//            c.printInfo();
+//            println();
+//        }
         return newProductsList;
+    }
+
+    private fun safeProductCardToList(type: ProductTypes) {
+        when (type) {
+            ProductTypes.FOOD -> {
+                val foodCard = FoodProductsCard()
+                print("Введите название продукта: ");
+                foodCard.productName = readln()
+                print("Введите марку продукта: ");
+                foodCard.brand = readln()
+                print("Введите цену: ");
+                foodCard.price = readln().toDouble()
+                print("Введите вес / объём: ")
+                foodCard.weightOrVolume = readln().toDouble()
+                print("Введите калорийность: ")
+                foodCard.caloriesCount = readln().toInt()
+                foodCard.type = type
+                _productCardsList.add(foodCard)
+            }
+
+            ProductTypes.SHOE -> {
+                val shoeCard = ShoesCard()
+                print("Введите название обуви: ");
+                shoeCard.productName = readln()
+                print("Введите марку товара: ");
+                shoeCard.brand = readln()
+                print("Введите цену: ");
+                shoeCard.price = readln().toDouble()
+                print("Введите размер: ")
+                shoeCard.size = readln().toDouble()
+                shoeCard.type = type
+                _productCardsList.add(shoeCard)
+            }
+
+            ProductTypes.ELECTRONICS -> {
+                val electronicCard = ElectronicsCard()
+                print("Введите название техники: ");
+                electronicCard.productName = readln()
+                print("Введите марку техники: ");
+                electronicCard.brand
+                print("Введите цену: ");
+                electronicCard.price = readln().toDouble()
+                print("Введите мощность: ")
+                electronicCard.power = readln().toInt()
+                electronicCard.type = type
+                _productCardsList.add(electronicCard)
+            }
+
+            ProductTypes.NO_TYPE -> TODO()
+        }
     }
 
 
@@ -142,9 +196,9 @@ object ProductCardsRepository {
 //        rewriteFile(list, productsFile);
     }
 
-    private fun rewriteFile(list: List<ProductCard>, file: File) {
+    private fun rewriteFile(file: File) {
         file.writeText("");
-        for (card in list) {
+        for (card in _productCardsList) {
             file.appendText("${card.productName}%${card.brand}%${card.price}%")
             when (card) {
 
