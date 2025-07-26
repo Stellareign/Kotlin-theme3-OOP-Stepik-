@@ -49,6 +49,7 @@ class Accountant1(
                 OperationCodes.FIRE_EMPLOYEE -> TODO()
                 OperationCodes.SHOW_ALL_EMPLOYEES -> TODO()
                 OperationCodes.CHANGE_SALARY -> TODO()
+                OperationCodes.SAFE_CHANGES -> TODO()
             }
         }
     }

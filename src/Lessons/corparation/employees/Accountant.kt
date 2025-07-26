@@ -12,12 +12,13 @@ class Accountant(
     id: Int,
     name: String,
     age: Int,
-    salary : Int
+    salary: Int
 ) : Worker(id, name, age, Workers.ACCOUNTANT, salary), Cleaner, Supplier {
 
     private val productsTypes = ProductTypes.entries;
     private val operation = OperationCodes.entries;
-//    private val productCardsRepository = ProductCardsRepository()
+
+    //    private val productCardsRepository = ProductCardsRepository()
     private val hr = HR();
 //    private val workersRepository = WorkersRepository()
 
@@ -43,6 +44,7 @@ class Accountant(
                     ProductCardsRepository.saveChanges()
                     break;
                 }
+
                 OperationCodes.REGISTER_ITEM -> {
                     print("Укажите код типа товара: (");
                     for ((index, type) in productsTypes.withIndex()) { // вывод индекса и названия - объявляем две переменные
@@ -58,11 +60,12 @@ class Accountant(
                     ProductCardsRepository.saveChanges()
                     ProductCardsRepository.showAllProductCards()
                 }
+
                 OperationCodes.DELETE_ITEM -> {
                     val list = ProductCardsRepository.productCardsList
                     print("Введите наименование товара для удаления: ");
                     val name = readln();
-                    ProductCardsRepository.removeCardFromList( name);
+                    ProductCardsRepository.removeCardFromList(name);
                     print("Товар удалён, на складе осталось: \n");
                     ProductCardsRepository.showAllProductCards()
                 }
@@ -71,10 +74,13 @@ class Accountant(
                 OperationCodes.FIRE_EMPLOYEE -> hr.fireEmployee();
                 OperationCodes.SHOW_ALL_EMPLOYEES -> hr.showAllEmployees();
                 OperationCodes.CHANGE_SALARY -> hr.changeSalary();
+                OperationCodes.SAFE_CHANGES -> {
+                    WorkersRepository.saveChanges()
+                    ProductCardsRepository.saveChanges()
+                }
             }
         }
     }
-
 
 
     private fun punctuationMarks(index: Int, size: Int) {

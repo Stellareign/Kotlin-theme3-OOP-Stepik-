@@ -42,12 +42,10 @@ class HR(
         WorkersRepository.changeSalary(id, newSalary);
     }
 
-    fun showAllEmployees(): MutableList<Worker> {
-        val employeesList = WorkersRepository.employeesList
-        for (worker in employeesList) {
+    fun showAllEmployees() {
+        for (worker in WorkersRepository.employeesList) {
             println(worker);
         }
-        return employeesList;
     }
 
     fun fireEmployee() {
@@ -56,9 +54,7 @@ class HR(
         WorkersRepository.fireEmployee(id)
     }
 
-
     fun addWorker(): List<Worker> {
-//        val employeesList = WorkersRepository.employeesList
         print("Введите id сотрудника равное: ")
         val id = readln().toInt();
         print("Введите имя сотрудника: ");
@@ -102,6 +98,6 @@ class HR(
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}()}"
+        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}}"
     }
 }
