@@ -52,4 +52,5 @@ fun main() {
 //    }
     println(accountant);
     accountant.work()
+
 }

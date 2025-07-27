@@ -33,6 +33,9 @@ class Director (
     override fun work() {
         println("I'm drink coffee")
     }
+    override fun copy(salary: Int): Director { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
+        return Director(this.id, this.name, this.age, salary)
+    }
 
 
     override fun toString(): String {

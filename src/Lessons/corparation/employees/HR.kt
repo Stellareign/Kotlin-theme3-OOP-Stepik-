@@ -17,6 +17,12 @@ class HR(
     salary
 ), Cleaner, Supplier {
 
+    constructor() : this( // вторичный конструктор для создания пустых объектов
+        id = 0,
+        name = "",
+        age = 0,
+        salary = 0
+    )
 //    val workersRepository = WorkersRepository();
 
     override fun delivery() {
@@ -33,6 +39,10 @@ class HR(
 
     private val posts = Workers.entries;
     private val postsCodes = Workers.entries;
+
+    override fun copy(salary: Int): HR { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
+        return HR(this.id, this.name, this.age, salary)
+    }
 
     fun changeSalary() {
         print("Введите id сотрудника: ")
@@ -98,6 +108,6 @@ class HR(
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}}"
+        return "id: $id, name: $name, age: $age, post: $post, salary: ${getSalary()}"
     }
 }

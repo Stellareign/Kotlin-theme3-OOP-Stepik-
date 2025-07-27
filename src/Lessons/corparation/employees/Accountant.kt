@@ -6,6 +6,7 @@ import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.Worker
 import Lessons.corparation.reposits.ProductCardsRepository
 import Lessons.corparation.reposits.WorkersRepository
+import org.w3c.dom.ls.LSOutput
 
 
 class Accountant(
@@ -13,8 +14,15 @@ class Accountant(
     name: String,
     age: Int,
     salary: Int
-) : Worker(id, name, age, Workers.ACCOUNTANT, salary), Cleaner, Supplier {
-
+) : Worker(id, name, age, Workers.ACCOUNTANT, salary = salary), Cleaner, Supplier {
+    
+    // вторичный конструктор для создания пустых объектов:
+    constructor() : this(
+        id = 0,
+        name = "",
+        age = 0,
+        salary = 0
+    )
     private val productsTypes = ProductTypes.entries;
     private val operation = OperationCodes.entries;
 
@@ -28,6 +36,10 @@ class Accountant(
 
     override fun clean() {
         super.clean()
+    }
+
+    override fun copy(salary: Int): Accountant { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
+       return Accountant(this.id, this.name, this.age, salary)
     }
 
     override fun work() {

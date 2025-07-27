@@ -54,6 +54,10 @@ class Accountant1(
         }
     }
 
+    override fun copy(salary: Int): Worker {
+        TODO("Not yet implemented")
+    }
+
     fun punctuationMarks(index: Int, size: Int) {
         if (index < size) {
             print(", ")

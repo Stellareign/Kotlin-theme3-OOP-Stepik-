@@ -107,7 +107,7 @@ object WorkersRepository {
             println("Сотрудник не найден.")
         } else {
             print("Сотрудник $worker уволен \n")
-            _employeesList.removeAll { worker.id == id }
+            _employeesList.remove(worker)
 //            rewriteEmployeesListToFile(employeesList)
         }
     }
@@ -117,7 +117,10 @@ object WorkersRepository {
         if (worker == null) {
             println("Сотрудник не найден.")
         } else {
-            worker.setSalary(newSalary);
+           val workerWithNewSalary = worker.copy(newSalary)
+            print("Зарплата сотрудника ${worker.id} изменена на ${workerWithNewSalary.getSalary()}\n")
+            _employeesList.remove(worker)
+//            _employeesList.add(WorkerWithNewSalary);
 //            rewriteEmployeesListToFile(employeesList)
         }
     }
