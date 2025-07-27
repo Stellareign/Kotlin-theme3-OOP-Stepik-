@@ -30,8 +30,8 @@ class Consultant(
         }
     }
 
-    override fun copy(salary: Int): Consultant { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
-        return Consultant(this.id, this.name, this.age, salary)
+    override fun copy(salary: Int, age: Int): Consultant { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
+        return Consultant(this.id, this.name, age, salary)
     }
 
     fun clientService(clientCount: Int = Random.Default.nextInt(1, 10)): Int {

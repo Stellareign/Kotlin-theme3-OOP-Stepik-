@@ -32,7 +32,8 @@ class Secretary(
         println("I'm make coffee")
     }
 
-    override fun copy(salary: Int): Secretary { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
+
+    override fun copy(salary: Int, age: Int): Secretary { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
         return Secretary(this.id, this.name, this.age, salary)
     }
     override fun toString(): String {

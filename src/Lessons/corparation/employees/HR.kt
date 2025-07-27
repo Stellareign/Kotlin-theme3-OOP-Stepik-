@@ -40,8 +40,8 @@ class HR(
     private val posts = Workers.entries;
     private val postsCodes = Workers.entries;
 
-    override fun copy(salary: Int): HR { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
-        return HR(this.id, this.name, this.age, salary)
+    override fun copy(salary: Int, age: Int): HR { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
+        return HR(this.id, this.name, age, salary)
     }
 
     fun changeSalary() {
@@ -50,6 +50,13 @@ class HR(
         print("Введите новую зарплату сотрудника: ")
         val newSalary = readln().toInt();
         WorkersRepository.changeSalary(id, newSalary);
+    }
+    fun changeAge() {
+        print("Введите id сотрудника: ")
+        val id = readln().toInt();
+        print("Введите новый возраст сотрудника: ")
+        val newAge = readln().toInt();
+        WorkersRepository.changeAge(id, newAge);
     }
 
     fun showAllEmployees() {
@@ -65,7 +72,7 @@ class HR(
     }
 
     fun addWorker(): List<Worker> {
-        print("Введите id сотрудника равное: ")
+        print("Введите id нового сотрудника: ")
         val id = readln().toInt();
         print("Введите имя сотрудника: ");
         val name = readln();

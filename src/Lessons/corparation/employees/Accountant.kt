@@ -38,8 +38,8 @@ class Accountant(
         super.clean()
     }
 
-    override fun copy(salary: Int): Accountant { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
-       return Accountant(this.id, this.name, this.age, salary)
+    override fun copy(salary: Int, age: Int): Accountant { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
+       return Accountant(this.id, this.name, age, salary)
     }
 
     override fun work() {
@@ -86,6 +86,7 @@ class Accountant(
                 OperationCodes.FIRE_EMPLOYEE -> hr.fireEmployee();
                 OperationCodes.SHOW_ALL_EMPLOYEES -> hr.showAllEmployees();
                 OperationCodes.CHANGE_SALARY -> hr.changeSalary();
+                OperationCodes.CHANGE_AGE -> hr.changeAge();
                 OperationCodes.SAFE_CHANGES -> {
                     WorkersRepository.saveChanges()
                     ProductCardsRepository.saveChanges()

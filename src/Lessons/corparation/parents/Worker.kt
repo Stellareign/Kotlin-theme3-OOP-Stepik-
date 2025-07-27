@@ -15,7 +15,9 @@ abstract class Worker(
 
     abstract fun work()
 
-    abstract fun copy(salary: Int = this.salary) : Worker
+    abstract fun copy(salary: Int = this.salary, age: Int = this.age) : Worker
+    //при указании значения поля в методе
+    // (this.age, this.salary, например), оно становится необязательным для передачи в методе
 
     fun getSalary ()=this.salary;
 

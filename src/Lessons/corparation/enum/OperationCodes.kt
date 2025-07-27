@@ -9,6 +9,7 @@ enum class OperationCodes (val title: String) {
     FIRE_EMPLOYEE ("Уволить сотрудника"),
     SHOW_ALL_EMPLOYEES ("Список сотрудников"),
     CHANGE_SALARY ("Изменить зарплату"),
+    CHANGE_AGE ("Изменить возраст"),
     SAFE_CHANGES ("Сохранить изменения в БД")
 
 }

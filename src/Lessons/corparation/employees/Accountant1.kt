@@ -50,11 +50,12 @@ class Accountant1(
                 OperationCodes.SHOW_ALL_EMPLOYEES -> TODO()
                 OperationCodes.CHANGE_SALARY -> TODO()
                 OperationCodes.SAFE_CHANGES -> TODO()
+                OperationCodes.CHANGE_AGE -> TODO()
             }
         }
     }
 
-    override fun copy(salary: Int): Worker {
+    override fun copy(salary: Int, age: Int): Worker {
         TODO("Not yet implemented")
     }
 

@@ -7,7 +7,6 @@ import Lessons.corparation.employees.HR
 import Lessons.corparation.employees.Secretary
 import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.Worker
-import jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle
 import java.io.File
 
 object WorkersRepository {
@@ -121,6 +120,17 @@ object WorkersRepository {
            val workerWithNewSalary = worker.copy(newSalary)
             print("Зарплата сотрудника ${worker.id} изменена на ${workerWithNewSalary.getSalary()}\n")
             _employeesList[_employeesList.indexOf(worker)] = worker.copy(salary = newSalary)
+//            rewriteEmployeesListToFile(employeesList)
+        }
+    }
+    fun changeAge(id: Int, newAge: Int) {
+        val worker = _employeesList.find { it.id == id }
+        if (worker == null) {
+            println("Сотрудник не найден.")
+        } else {
+            val workerWithNewAge = worker.copy(newAge)
+            print("Возраст сотрудника ${worker.id} изменён на ${workerWithNewAge.age}\n")
+            _employeesList[_employeesList.indexOf(worker)] = worker.copy(age = newAge)
 //            rewriteEmployeesListToFile(employeesList)
         }
     }
