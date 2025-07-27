@@ -7,6 +7,7 @@ import Lessons.corparation.employees.HR
 import Lessons.corparation.employees.Secretary
 import Lessons.corparation.enum.Workers
 import Lessons.corparation.parents.Worker
+import jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle
 import java.io.File
 
 object WorkersRepository {
@@ -119,8 +120,7 @@ object WorkersRepository {
         } else {
            val workerWithNewSalary = worker.copy(newSalary)
             print("Зарплата сотрудника ${worker.id} изменена на ${workerWithNewSalary.getSalary()}\n")
-            _employeesList.remove(worker)
-//            _employeesList.add(WorkerWithNewSalary);
+            _employeesList[_employeesList.indexOf(worker)] = worker.copy(salary = newSalary)
 //            rewriteEmployeesListToFile(employeesList)
         }
     }
