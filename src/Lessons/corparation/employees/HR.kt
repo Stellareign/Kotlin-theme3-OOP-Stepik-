@@ -89,8 +89,6 @@ class HR(
         val newEmployee = safeWorker(id, name, age, post, salary);
 //        employeesList.add(newEmployee);
         WorkersRepository.registerNewEmployee(newEmployee);
-        println("Добавлен сотрудник ${newEmployee}");
-
         //return employeesList;
         return WorkersRepository.employeesList
     }

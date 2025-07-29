@@ -24,7 +24,15 @@ object WorkersRepository {
 
     fun registerNewEmployee(worker: Worker) {
 //        writeEmployeeToFile(worker)
-        _employeesList.add(worker);
+        for (employee in _employeesList) {
+            if (worker == employee) {
+                print("Работник  ${employee.id} уже есть в базе. Нельзя создавать дубликат\n")
+                return
+            }
+            _employeesList.add(worker);
+            print("Работник  ${employee.id} добавлен")
+
+        }
     }
 
 
