@@ -50,7 +50,7 @@ abstract class Worker(
     }
 
     override fun hashCode(): Int {
-        var result = id
+        var result = id //у чисел hashCod совпадает с их значением, п.э. у них его вызывать нет смысла
         result = 31 * result + age
         result = 31 * result + salary
         result = 31 * result + name.hashCode()
