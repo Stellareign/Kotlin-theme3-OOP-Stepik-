@@ -1,41 +1,29 @@
-package Lessons.corparation.employees
+package Lessons.corparationDataClass.employees
 
-import Lessons.corparation.enum.OperationCodes
-import Lessons.corparation.enum.ProductTypes
-import Lessons.corparation.enum.Workers
-import Lessons.corparation.parents.Worker
-import Lessons.corparation.reposits.ProductCardsRepository
-import Lessons.corparation.reposits.WorkersRepository
+import Lessons.corparationDataClass.enum.OperationCodes
+import Lessons.corparationDataClass.enum.ProductTypes
+import Lessons.corparationDataClass.enum.Workers
+import Lessons.corparationDataClass.parents.Worker
+import Lessons.corparationDataClass.reposits.ProductCardsRepository
+import Lessons.corparationDataClass.reposits.WorkersRepository
 
 
-class Accountant(
-    id: Int,
-    name: String,
-    age: Int,
-    salary: Int
-) : Worker(id, name, age, Workers.ACCOUNTANT, salary = salary), Cleaner, Supplier {
-    
-    // вторичный конструктор для создания пустых объектов:
-    constructor() : this(
-        id = 0,
-        name = "",
-        age = 0,
-        salary = 0
-    )
+data class Accountant(
+    override val id: Int = 0,
+    override val name: String = "",
+    override val age: Int = 0,
+    override val salary: Int = 0
+) : Worker(id, name, age, Workers.ACCOUNTANT, salary), Cleaner, Supplier {
+
     private val productsTypes = ProductTypes.entries;
     private val operation = OperationCodes.entries;
-
-    //    private val productCardsRepository = ProductCardsRepository()
     private val hr = HR();
-//    private val workersRepository = WorkersRepository()
+
 
     override fun delivery() {
         println("${name}: доставляю товары")
     }
 
-    override fun clean() {
-        super.clean()
-    }
 
     override fun copy(salary: Int, age: Int): Accountant { //метод создания копии объекта - алее сохраняется в коллекцию вместо старого
        return Accountant(this.id, this.name, age, salary)
@@ -46,7 +34,6 @@ class Accountant(
             print("Введите код операции: \n");
             for ((index, operationName) in operation.withIndex()) {
                 print("$index - ${operationName.title}\n")
-//                punctuationMarks(index, operation.size - 1);
             }
             val operationCode = readln().toInt();
             when (operation[operationCode]) {
@@ -104,6 +91,6 @@ class Accountant(
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: ${this.getSalary()}"
+        return "id: $id, name: $name, age: $age, post: $post, salary: $salary"
     }
 }

@@ -1,0 +1,228 @@
+package Lessons.corparationDataClass.reposits
+
+import Lessons.corparationDataClass.enum.ProductTypes
+import Lessons.corparationDataClass.internetShop.ElectronicsCard
+import Lessons.corparationDataClass.internetShop.FoodProductsCard
+import Lessons.corparationDataClass.internetShop.ShoesCard
+import Lessons.corparationDataClass.parents.ProductCard
+
+import java.io.File
+
+object ProductCardsRepository {
+
+    private val productsFile = File("products_file.txt")
+
+    private val _productCardsList: MutableList<ProductCard> = readTextFromFile() //внутренняя переменная
+
+    val productCardsList: List<ProductCard>
+        get() = _productCardsList.toList() // оперативная переменная - копия основной
+
+    fun saveChanges() {
+        rewriteFile(productsFile)
+    }
+
+    fun showAllProductCards() {
+        for (c in _productCardsList) {
+            c.printInfo()
+            println()
+        }
+    }
+
+    fun safeProductCards(type: ProductTypes) {
+        safeProductCardToList(type)
+    }
+
+    fun removeCardFromList(name: String) {
+        removeCard(name)
+    }
+
+    private fun readTextFromFile(): MutableList<ProductCard> {
+        val newProductsList = mutableListOf<ProductCard>();
+        if (!productsFile.exists()) {
+            println("File does not exist");
+
+            productsFile.createNewFile()
+            return newProductsList;
+        }
+        val stringCard = productsFile.readText().trim();
+        if (stringCard.isEmpty()) {
+            println("File is empty");
+            return newProductsList;
+        }
+        val cardsListFromFile = stringCard.split("\n");
+        val cardsList = mutableListOf<List<String>>();
+
+
+        for (string in cardsListFromFile) {
+            val s = string.split("%");
+            cardsList.add(s);
+        }
+
+        for (card in cardsList) {
+            if (card.contains("${ProductTypes.FOOD}")) {
+                newProductsList.add(readFoodCard(card));
+
+            } else if (card.contains("${ProductTypes.SHOE}")) {
+                newProductsList.add(readShoeCard(card));
+
+            } else if (card.contains("${ProductTypes.ELECTRONICS}")) {
+                newProductsList.add(readElectronicCard(card));
+            }
+        }
+        return newProductsList;
+    }
+
+    private fun safeProductCardToList(type: ProductTypes) {
+        when (type) {
+            ProductTypes.FOOD -> {
+                val foodCard = FoodProductsCard()
+                print("Введите название продукта: ");
+                foodCard.productName = readln()
+                print("Введите марку продукта: ");
+                foodCard.brand = readln()
+                print("Введите цену: ");
+                foodCard.price = readln().toDouble()
+                print("Введите вес / объём: ")
+                foodCard.weightOrVolume = readln().toDouble()
+                print("Введите калорийность: ")
+                foodCard.caloriesCount = readln().toInt()
+                foodCard.type = type
+                _productCardsList.add(foodCard)
+            }
+
+            ProductTypes.SHOE -> {
+                val shoeCard = ShoesCard()
+                print("Введите название обуви: ");
+                shoeCard.productName = readln()
+                print("Введите марку товара: ");
+                shoeCard.brand = readln()
+                print("Введите цену: ");
+                shoeCard.price = readln().toDouble()
+                print("Введите размер: ")
+                shoeCard.size = readln().toDouble()
+                shoeCard.type = type
+                _productCardsList.add(shoeCard)
+            }
+
+            ProductTypes.ELECTRONICS -> {
+                val electronicCard = ElectronicsCard()
+                print("Введите название техники: ");
+                electronicCard.productName = readln()
+                print("Введите марку техники: ");
+                electronicCard.brand
+                print("Введите цену: ");
+                electronicCard.price = readln().toDouble()
+                print("Введите мощность: ")
+                electronicCard.power = readln().toInt()
+                electronicCard.type = type
+                _productCardsList.add(electronicCard)
+            }
+
+            ProductTypes.NO_TYPE -> TODO()
+        }
+    }
+
+
+    private fun safeProductCardToFile(type: ProductTypes) {
+        when (type) {
+            ProductTypes.FOOD -> {
+                print("Введите название продукта: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите марку продукта: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите цену: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите вес / объём: ")
+                productsFile.appendText("${readln()}%");
+                print("Введите калорийность: ")
+                productsFile.appendText("${readln()}%");
+                productsFile.appendText("FOOD")
+                productsFile.appendText("\n");
+            }
+
+            ProductTypes.SHOE -> {
+                print("Введите название обуви: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите марку товара: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите цену: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите размер: ")
+                productsFile.appendText("${readln()}%");
+                productsFile.appendText("SHOE")
+                productsFile.appendText("\n");
+            }
+
+            ProductTypes.ELECTRONICS -> {
+                print("Введите название техники: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите марку техники: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите цену: ");
+                productsFile.appendText("${readln()}%");
+                print("Введите мощность: ")
+                productsFile.appendText("${readln()}%");
+                productsFile.appendText("ELECTRONICS")
+                productsFile.appendText("\n");
+            }
+
+            ProductTypes.NO_TYPE -> TODO()
+        }
+    }
+
+
+    private fun removeCard(name: String) {
+        _productCardsList.removeAll { it.productName == name } // наиболее надёжный способ для нашего варианта + лаконичность (внутри предикат)
+    }
+
+    private fun rewriteFile(file: File) {
+        file.writeText("");
+        for (card in _productCardsList) {
+            file.appendText("${card.productName}%${card.brand}%${card.price}%")
+            when (card) {
+
+                is FoodProductsCard -> {
+                    file.appendText("${card.weightOrVolume}%${card.caloriesCount}%${card.type}\n")
+                }
+
+                is ShoesCard -> {
+                    file.appendText("${card.size}%${card.type}\n")
+                }
+
+                is ElectronicsCard -> {
+                    file.appendText("${card.power}%${card.powerSocket}%${card.type}\n")
+                }
+            }
+        }
+    }
+
+    private fun readShoeCard(list: List<String>): ShoesCard {
+        val name = list[0];
+        val brand = list[1];
+        val price = list[2].toDouble()
+        val size = list[3].toDouble();
+        val type = list.last()
+        return ShoesCard(name, brand, price, size);
+
+    }
+
+    private fun readFoodCard(list: List<String>): FoodProductsCard {
+        val name = list[0]
+        val brand = list[1]
+        val price = list[2].toDouble()
+        val weightOrVolume = list[3].toDouble();
+        val calories = list[4].toInt();
+        val type = list.last()
+        return FoodProductsCard(name, brand, price, weightOrVolume, calories, "");
+    }
+
+    private fun readElectronicCard(list: List<String>): ElectronicsCard {
+        val name = list[0];
+        val brand = list[1];
+        val price = list[2].toDouble();
+        val power = list[3].toInt();
+        val rosette = list[4];
+        val type = list.last()
+        return ElectronicsCard(name, brand, price, power, rosette, "")
+    }
+}
