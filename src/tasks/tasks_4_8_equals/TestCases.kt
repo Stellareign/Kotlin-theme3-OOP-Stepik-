@@ -1,4 +1,4 @@
-package tasks_4_8_equals
+package tasks.tasks_4_8_equals
 // Класс с тестами для проверки методов equals, ==, и ===
 class TestCases {
     fun runTests() {

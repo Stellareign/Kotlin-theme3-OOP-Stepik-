@@ -1,4 +1,4 @@
-package tasks_4_7_BackingFieldAndCopy
+package tasks.tasks_4_7_BackingFieldAndCopy
 
 
 fun main() {

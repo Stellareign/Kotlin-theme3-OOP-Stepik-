@@ -2,7 +2,7 @@ package Lessons.corparationDataClass.reposits
 
 import Lessons.corparationDataClass.enum.ProductTypes
 import Lessons.corparationDataClass.internetShop.ElectronicsCard
-import Lessons.corparationDataClass.internetShop.FoodProductsCard
+import Lessons.corparationDataClass.internetShop.FoodCard
 import Lessons.corparationDataClass.internetShop.ShoesCard
 import Lessons.corparationDataClass.parents.ProductCard
 
@@ -12,20 +12,17 @@ object ProductCardsRepository {
 
     private val productsFile = File("products_file.txt")
 
-    private val _productCardsList: MutableList<ProductCard> = readTextFromFile() //внутренняя переменная
+    private val _productCardsSet: MutableSet<ProductCard> = readTextFromFile() //внутренняя переменная
 
     val productCardsList: List<ProductCard>
-        get() = _productCardsList.toList() // оперативная переменная - копия основной
+        get() = _productCardsSet.toList() // оперативная переменная - копия основной
 
     fun saveChanges() {
         rewriteFile(productsFile)
     }
 
     fun showAllProductCards() {
-        for (c in _productCardsList) {
-            c.printInfo()
-            println()
-        }
+        _productCardsSet.forEach { productCard -> println(productCard.toString()) }
     }
 
     fun safeProductCards(type: ProductTypes) {
@@ -36,8 +33,8 @@ object ProductCardsRepository {
         removeCard(name)
     }
 
-    private fun readTextFromFile(): MutableList<ProductCard> {
-        val newProductsList = mutableListOf<ProductCard>();
+    private fun readTextFromFile(): MutableSet<ProductCard> {
+        val newProductsList = mutableSetOf<ProductCard>();
         if (!productsFile.exists()) {
             println("File does not exist");
 
@@ -73,97 +70,40 @@ object ProductCardsRepository {
     }
 
     private fun safeProductCardToList(type: ProductTypes) {
+        print("Введите название продукта: ");
+        val productName = readln()
+        print("Введите марку продукта: ");
+        val brand = readln()
+        print("Введите цену: ");
+        val price = readln().toDouble()
         when (type) {
             ProductTypes.FOOD -> {
-                val foodCard = FoodProductsCard()
-                print("Введите название продукта: ");
-                foodCard.productName = readln()
-                print("Введите марку продукта: ");
-                foodCard.brand = readln()
-                print("Введите цену: ");
-                foodCard.price = readln().toDouble()
                 print("Введите вес / объём: ")
-                foodCard.weightOrVolume = readln().toDouble()
+                val weightOrVolume = readln().toDouble()
                 print("Введите калорийность: ")
-                foodCard.caloriesCount = readln().toInt()
-                foodCard.type = type
-                _productCardsList.add(foodCard)
+                val caloriesCount = readln().toInt()
+
+                _productCardsSet.add(FoodCard(productName, brand, price, weightOrVolume, caloriesCount))
             }
 
             ProductTypes.SHOE -> {
-                val shoeCard = ShoesCard()
-                print("Введите название обуви: ");
-                shoeCard.productName = readln()
-                print("Введите марку товара: ");
-                shoeCard.brand = readln()
-                print("Введите цену: ");
-                shoeCard.price = readln().toDouble()
                 print("Введите размер: ")
-                shoeCard.size = readln().toDouble()
-                shoeCard.type = type
-                _productCardsList.add(shoeCard)
+                val size = readln().toDouble()
+                _productCardsSet.add(ShoesCard(productName, brand, price, size))
             }
 
             ProductTypes.ELECTRONICS -> {
-                val electronicCard = ElectronicsCard()
-                print("Введите название техники: ");
-                electronicCard.productName = readln()
-                print("Введите марку техники: ");
-                electronicCard.brand
-                print("Введите цену: ");
-                electronicCard.price = readln().toDouble()
                 print("Введите мощность: ")
-                electronicCard.power = readln().toInt()
-                electronicCard.type = type
-                _productCardsList.add(electronicCard)
-            }
-
-            ProductTypes.NO_TYPE -> TODO()
-        }
-    }
-
-
-    private fun safeProductCardToFile(type: ProductTypes) {
-        when (type) {
-            ProductTypes.FOOD -> {
-                print("Введите название продукта: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите марку продукта: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите цену: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите вес / объём: ")
-                productsFile.appendText("${readln()}%");
-                print("Введите калорийность: ")
-                productsFile.appendText("${readln()}%");
-                productsFile.appendText("FOOD")
-                productsFile.appendText("\n");
-            }
-
-            ProductTypes.SHOE -> {
-                print("Введите название обуви: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите марку товара: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите цену: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите размер: ")
-                productsFile.appendText("${readln()}%");
-                productsFile.appendText("SHOE")
-                productsFile.appendText("\n");
-            }
-
-            ProductTypes.ELECTRONICS -> {
-                print("Введите название техники: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите марку техники: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите цену: ");
-                productsFile.appendText("${readln()}%");
-                print("Введите мощность: ")
-                productsFile.appendText("${readln()}%");
-                productsFile.appendText("ELECTRONICS")
-                productsFile.appendText("\n");
+                val power = readln().toInt()
+                _productCardsSet.add(
+                    ElectronicsCard(
+                        productName,
+                        brand,
+                        price,
+                        power,
+                        powerSocket = "euro"
+                    )
+                )
             }
 
             ProductTypes.NO_TYPE -> TODO()
@@ -172,16 +112,16 @@ object ProductCardsRepository {
 
 
     private fun removeCard(name: String) {
-        _productCardsList.removeAll { it.productName == name } // наиболее надёжный способ для нашего варианта + лаконичность (внутри предикат)
+        _productCardsSet.removeAll { it.productName == name } // наиболее надёжный способ для нашего варианта + лаконичность (внутри предикат)
     }
 
     private fun rewriteFile(file: File) {
         file.writeText("");
-        for (card in _productCardsList) {
+        for (card in _productCardsSet) {
             file.appendText("${card.productName}%${card.brand}%${card.price}%")
             when (card) {
 
-                is FoodProductsCard -> {
+                is FoodCard -> {
                     file.appendText("${card.weightOrVolume}%${card.caloriesCount}%${card.type}\n")
                 }
 
@@ -202,18 +142,24 @@ object ProductCardsRepository {
         val price = list[2].toDouble()
         val size = list[3].toDouble();
         val type = list.last()
-        return ShoesCard(name, brand, price, size);
+        return ShoesCard(name, brand = brand, price = price, size = size);
 
     }
 
-    private fun readFoodCard(list: List<String>): FoodProductsCard {
+    private fun readFoodCard(list: List<String>): FoodCard {
         val name = list[0]
         val brand = list[1]
         val price = list[2].toDouble()
         val weightOrVolume = list[3].toDouble();
         val calories = list[4].toInt();
         val type = list.last()
-        return FoodProductsCard(name, brand, price, weightOrVolume, calories, "");
+        return FoodCard(
+            productName = name,
+            brand = brand,
+            price = price,
+            weightOrVolume = weightOrVolume,
+            caloriesCount = calories
+        );
     }
 
     private fun readElectronicCard(list: List<String>): ElectronicsCard {

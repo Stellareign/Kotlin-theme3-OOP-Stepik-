@@ -1,4 +1,4 @@
-package tasks_4_8_equals
+package tasks.tasks_4_8_equals
 
 // Класс с переопределенным методом equals по id
 class Person(val id: Int, val name: String) {

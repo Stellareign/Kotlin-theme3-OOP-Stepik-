@@ -12,14 +12,9 @@ abstract class Worker(
 
     abstract fun work()
 
-    abstract fun copy(salary: Int = this.salary, age: Int = this.age) : Worker
-
-//    fun getSalary ()=this.salary;
+    abstract fun copy(salary: Int = this.salary, age: Int = this.age): Worker
 
 
-    override fun toString(): String {
-        return "Worker(id: $id, name: $name, age: $age, post: $post, salary: $salary)"
-    }
-
-// методы иквалс, сеттеры, геттеры и хэш-код можно удалить, т.к. они автоматически под капотом генерируются в наследных дата-классах
+// методы иквалс, сеттеры, геттеры, тустринг и хэш-код можно удалить, т.к. они автоматически под капотом генерируются
+// в наследных дата-классах, при необходимости их можно переопределить там
 }

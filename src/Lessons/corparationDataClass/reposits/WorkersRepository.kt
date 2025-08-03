@@ -20,15 +20,8 @@ object WorkersRepository {
 
 
     fun registerNewEmployee(worker: Worker) {
-        for (employee in _employeesSet) {
-            if (worker == employee) {
-                print("Работник  ${employee.id} уже есть в базе. Нельзя создавать дубликат\n")
-                return
-            }
             _employeesSet.add(worker);
-            print("Работник  ${employee.id} добавлен")
-
-        }
+            print("Работник  ${worker.id} добавлен")
     }
 
 

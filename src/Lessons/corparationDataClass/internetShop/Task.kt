@@ -5,7 +5,7 @@ fun main() {
 //        35000.0, "large", 250, "euro", "52\", плоский");
 //    electronicsCard.printInfo();
 //    println();
-//    val milk = FoodProductsCard("Milk", "Savinov", 30.50,
+//    val milk = FoodCard("Milk", "Savinov", 30.50,
 //        "milk", "1 литр", 1.0, 120);
 //    milk.printInfo();
 //    println()
@@ -16,12 +16,14 @@ fun main() {
 
 //    val accountant = Accountant(0,"Df", 32);
 //    accountant.work()
-    val shoe = ShoesCard("shoe", "Nike", 3500.0, 35.5);
-    println(shoe)
-    val foodProductsCard = FoodProductsCard("food", "Yar", 45.5,
-        1.5, 450,"milk")
-    println(foodProductsCard)
-    val electronicsCard = ElectronicsCard("tv", "Sony", 45000.0,800)
-    println(electronicsCard)
+//    val shoe = ShoesCard("shoe", "Nike", 3500.0, 35.5);
+//    println(shoe)
+//    val foodCard = FoodCard(
+//        brand = "Yar", price = 45.5, weightOrVolume = 1.5,
+//        caloriesCount = 450, description = "milk"
+//    )
+//    println(foodCard)
+//    val electronicsCard = ElectronicsCard("tv", "Sony", 45000.0,800)
+//    println(electronicsCard)
 
 }

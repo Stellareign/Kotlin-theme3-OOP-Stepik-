@@ -77,9 +77,7 @@ data class HR(
         print("Укажите зарплату: ")
         val salary = readln().toInt();
         val newEmployee = safeWorker(id, name, age, post, salary);
-//        employeesList.add(newEmployee);
         WorkersRepository.registerNewEmployee(newEmployee);
-        //return employeesList;
         return WorkersRepository.employeesList
     }
 
