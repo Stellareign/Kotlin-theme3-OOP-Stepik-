@@ -1,5 +1,6 @@
 package Lessons.corparationDataClass.employees
 
+import Lessons.corparationDataClass.employees.Secretary
 import Lessons.corparationDataClass.enum.Workers
 import Lessons.corparationDataClass.parents.Worker
 
@@ -13,7 +14,10 @@ data class Director (
     override fun delivery() {
         println("${name}: доставляю товары")
     }
-
+    fun takeCoffee(secretary: Secretary, cupCount : Int, coffeeName : String) {
+        secretary.yourCoffee(cupCount, coffeeName);
+        println("Thank Yuo, ${secretary.name}. $coffeeName is very good. :)")
+    }
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
     }
@@ -28,7 +32,10 @@ data class Director (
 
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: $salary"
+        return "Директор: id: $id, name: $name, age: $age, post: $post, salary: $salary"
     }
 
+    override fun printInfo(){
+       println(toString())
+    }
 }

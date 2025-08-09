@@ -29,6 +29,10 @@ data class Accountant(
        return Accountant(this.id, this.name, age, salary)
     }
 
+    override fun printInfo() {
+        print("Бухгалтер  + ${toString()}")
+    }
+
     override fun work() {
         while (true) {
             print("Введите код операции: \n");

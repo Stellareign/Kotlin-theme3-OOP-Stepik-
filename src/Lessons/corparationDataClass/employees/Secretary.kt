@@ -25,8 +25,8 @@ data class Secretary(
             println("Make coffee $coffeeName for you")
             println("Your coffee")
         }
-//        return coffeeName;
-        return "Espresso";
+        return coffeeName;
+//        return "Espresso";
     }
 
     override fun work() {
@@ -42,6 +42,10 @@ data class Secretary(
     }
 
     override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: $salary"
+        return "Секретарь: id: $id, name: $name, age: $age, post: $post, salary: $salary"
+    }
+
+    override fun printInfo() {
+        println(toString())
     }
 }

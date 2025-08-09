@@ -24,7 +24,11 @@ data class Consultant(
         println("I'm make consultation")
     }
 
-   override fun toString(): String {
-       return "id: $id, name: $name, age: $age, post: $post, salary: $salary"
+    override fun printInfo()  {
+        println(toString())
+    }
+
+    override fun toString(): String {
+       return "Консультант: id: $id, name: $name, age: $age, post: $post, salary: $salary"
     }
 }

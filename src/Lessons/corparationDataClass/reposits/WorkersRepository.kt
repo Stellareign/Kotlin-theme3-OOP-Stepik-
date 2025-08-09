@@ -16,12 +16,13 @@ object WorkersRepository {
         readFileToList() // backing field (внутреннее поле для работы с оригинальной коллекцией)
 
     val employeesList: List<Worker> // наружу принято отдавать неизменяемую коллекцию
-        get() = _employeesSet.toList().sortedBy { it.id } // .toMutableList() - создаём копию коллекции, с котрой работаем в оперативной памяти
+        get() = _employeesSet.toList()
+            .sortedBy { it.id } // .toMutableList() - создаём копию коллекции, с котрой работаем в оперативной памяти
 
 
     fun registerNewEmployee(worker: Worker) {
-            _employeesSet.add(worker);
-            print("Работник  ${worker.id} добавлен")
+        _employeesSet.add(worker);
+        print("Работник  ${worker.id} добавлен")
     }
 
 
@@ -113,8 +114,6 @@ object WorkersRepository {
             print("Зарплата сотрудника ${worker.id} изменена на ${workerWithNewSalary.salary}\n")
             _employeesSet.remove(worker)
             _employeesSet.add(workerWithNewSalary)
-
-
         }
     }
 
@@ -128,6 +127,24 @@ object WorkersRepository {
             _employeesSet.remove(worker)
             _employeesSet.add(workerWithNewAge)
         }
+    }
+
+    fun findSecretary(): Secretary? {
+        for (worker in _employeesSet) {
+            if (worker is Secretary) {
+                return worker
+            }
+        }
+        return null // так делать нельзя, иначе программа может упасть с NPE!
+    }
+
+    fun findDirector(): Director? {
+        for (worker in _employeesSet) {
+            if (worker is Director) {
+                return worker
+            }
+        }
+        return null// так делать нельзя, иначе программа может упасть с NPE!
     }
 
     fun saveChanges() {

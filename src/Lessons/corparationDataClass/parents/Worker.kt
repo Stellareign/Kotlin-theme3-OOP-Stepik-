@@ -14,6 +14,8 @@ abstract class Worker(
 
     abstract fun copy(salary: Int = this.salary, age: Int = this.age): Worker
 
+    abstract fun printInfo()
+
 
 // методы иквалс, сеттеры, геттеры, тустринг и хэш-код можно удалить, т.к. они автоматически под капотом генерируются
 // в наследных дата-классах, при необходимости их можно переопределить там

@@ -34,6 +34,10 @@ data class HR(
         return HR(this.id, this.name, age, salary)
     }
 
+    override fun printInfo() {
+        print("Кадровик  + ${toString()}")
+    }
+
     fun changeSalary() {
         print("Введите id сотрудника: ")
         val id = readln().toInt();
@@ -100,7 +104,5 @@ data class HR(
         }
     }
 
-    override fun toString(): String {
-        return "id: $id, name: $name, age: $age, post: $post, salary: $salary"
-    }
+
 }
