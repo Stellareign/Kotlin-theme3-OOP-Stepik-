@@ -23,5 +23,5 @@ fun main() {
         director?.takeCoffee(secretary, 2, "moquiato")
     }
 
-
+    val directorSalary = director?.salary ?: 0 // elvis-оператор
 }
