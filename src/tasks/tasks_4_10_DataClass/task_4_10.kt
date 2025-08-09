@@ -1,4 +1,4 @@
-package tasks_4_10_DataClass
+package tasks.tasks_4_10_DataClass
 
 
 // Базовый абстрактный класс для сотрудников

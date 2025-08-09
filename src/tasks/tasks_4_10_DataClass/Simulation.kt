@@ -1,4 +1,4 @@
-package tasks_4_10_DataClass
+package tasks.tasks_4_10_DataClass
 
 /**
  * Класс для проверки работы всех методов в классах
